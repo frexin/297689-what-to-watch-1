@@ -5,15 +5,15 @@ const MainPage = (props) => {
   return (
     <div className={`page-content catalog__movies-list`}>
       {
-        props.movies.map((name, index) => {
+        props.movies.map((name) => {
           return (
-            <article key={`index-${index}`} className="small-movie-card catalog__movies-card">
+            <article key={name} className="small-movie-card catalog__movies-card">
               <button className="small-movie-card__play-btn" type="button">Play</button>
               <div className="small-movie-card__image">
                 <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={name} width="280" height="175"/>
               </div>
               <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">{name}</a>
+                <a className="small-movie-card__link" onClick={props.onTitleClick} href="#">{name}</a>
               </h3>
             </article>
           );
@@ -24,11 +24,13 @@ const MainPage = (props) => {
 };
 
 MainPage.defaultProps = {
-  movies: []
+  movies: [],
+  onTitleClick: () => {}
 };
 
 MainPage.propTypes = {
-  movies: PropTypes.array
+  movies: PropTypes.arrayOf(PropTypes.string),
+  onTitleClick: PropTypes.func
 };
 
 export default MainPage;
