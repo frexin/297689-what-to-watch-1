@@ -26,7 +26,7 @@ class MoviesList extends React.Component {
           this.props.movies.map((item) => {
             return (
               <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.picture}
-                onMovieHover={this.onMovieSelect}/>
+                onMovieSelect={this.onMovieSelect}/>
             );
           })
         }
