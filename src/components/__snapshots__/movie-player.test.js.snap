@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviePlayer component loads correctly 1`] = `
+<div>
+  <video
+    autoPlay={true}
+    poster="bohemian-rhapsody.jpg"
+    src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+  />
+</div>
+`;

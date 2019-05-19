@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 
 const MoviePlayer = (props) => {
 
-    return (
-        <div>
-          <video width={props.width} height={props.height} autoPlay={true} muted={props.mute}
-                 poster={props.poster} src={props.src} />
-        </div>
-    );
+  return (
+    <div>
+      <video width={props.width} height={props.height} autoPlay={true} muted={props.mute} poster={props.poster} src={props.src} />
+    </div>
+  );
 };
 
 export default MoviePlayer;

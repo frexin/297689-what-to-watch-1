@@ -4,8 +4,8 @@ import MovieCard from './movie-card.jsx';
 
 class MoviesList extends React.PureComponent {
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.state = {
       activeMovie: {}
@@ -25,8 +25,7 @@ class MoviesList extends React.PureComponent {
         {
           this.props.movies.map((item) => {
             return (
-              <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.picture}
-                         preview={item.preview} onMovieSelect={this.onMovieSelect}/>
+              <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.picture} preview={item.preview} onMovieSelect={this.onMovieSelect}/>
             );
           })
         }

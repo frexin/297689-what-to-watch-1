@@ -6,14 +6,13 @@ import MovieCard from "./movie-card";
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`Main component renders correctly and able to deal with item click`, () => {
-  const fakeClick = jest.fn();
+it(`MovieCard component renders correctly and able to deal with item click`, () => {
+  const fakeHover = jest.fn();
   const movie = movies[0];
-  movie.onMovieSelect = fakeClick;
+  movie.onMovieSelect = fakeHover;
 
-  const app = shallow(<MovieCard id={movie.id} name={movie.name} picture={movie.picture} onMovieSelect={fakeClick}/>);
-  const play = app.find(`button.small-movie-card__play-btn`);
-  play.simulate(`click`);
+  const app = shallow(<MovieCard id={movie.id} preview={movie.preview} name={movie.name} picture={movie.picture} onMovieSelect={fakeHover}/>);
+  app.simulate(`mouseenter`);
 
-  expect(fakeClick).toHaveBeenCalledWith(movie);
+  expect(fakeHover).toHaveBeenCalledWith(movie);
 });
