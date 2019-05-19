@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import MovieCard from './movie-card.jsx';
 
-class MoviesList extends React.Component {
+class MoviesList extends React.PureComponent {
 
   constructor(props, context) {
     super(props, context);
@@ -26,7 +26,7 @@ class MoviesList extends React.Component {
           this.props.movies.map((item) => {
             return (
               <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.picture}
-                onMovieSelect={this.onMovieSelect}/>
+                         preview={item.preview} onMovieSelect={this.onMovieSelect}/>
             );
           })
         }
@@ -41,6 +41,7 @@ MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired
+    picture: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   })).isRequired
 };

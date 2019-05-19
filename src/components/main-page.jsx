@@ -19,7 +19,8 @@ MainPage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired
+    picture: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired
   })).isRequired
 };
 

@@ -1,21 +1,69 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import MoviePlayer from "./movie-player.jsx";
 
-const MovieCard = (props) => {
-  return (
-    <article key={name} className="small-movie-card catalog__movies-card">
-      <button className="small-movie-card__play-btn" onClick={() => {
-        props.onMovieSelect(props);
-      }} type="button">Play</button>
+class MovieCard extends React.PureComponent  {
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.msecondsTimer = 0;
+    this.intervalId = null;
+
+    this.previewHeight = 175;
+    this.previewWidth = 280;
+
+    this.state = {
+      showPlayer: false
+    };
+
+    this.startTimer = this.startTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
+  }
+
+  startTimer() {
+    this.msecondsTimer = 0;
+
+    this.intervalId = setInterval(() => {
+      this.msecondsTimer += 100;
+
+      if (this.msecondsTimer > 1000) {
+        this.setState({showPlayer: true});
+      }
+    }, 100);
+
+    this.props.onMovieSelect(this.props);
+  }
+
+  resetTimer() {
+    this.msecondsTimer = 0;
+    clearInterval(this.intervalId);
+
+    this.setState({showPlayer: false});
+
+  }
+
+  render() {
+    let videoPreview = <img src={`img/${this.props.picture}`} alt={this.props.name} width={this.previewWidth}
+                            height={this.previewHeight} />;
+
+    if (this.state.showPlayer) {
+      videoPreview = <MoviePlayer poster={`img/${this.props.picture}`} src={this.props.preview} mute={true}
+                                  width={this.previewWidth} height={this.previewHeight} />;
+    }
+
+    return (
+      <article key={name} onMouseEnter={this.startTimer} onMouseLeave={this.resetTimer}
+                     className="small-movie-card catalog__movies-card">
       <div className="small-movie-card__image">
-        <img src={`img/${props.picture}`} alt={props.name} width="280" height="175"/>
+        {videoPreview}
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="#">{props.name}</a>
+        <a className="small-movie-card__link" href="#">{this.props.name}</a>
       </h3>
-    </article>
-  );
-};
+    </article>);
+  };
+}
 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
