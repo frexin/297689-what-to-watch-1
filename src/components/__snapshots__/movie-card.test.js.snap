@@ -3,22 +3,17 @@
 exports[`MovieCard component loads correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
-  <button
-    className="small-movie-card__play-btn"
-    onClick={[Function]}
-    type="button"
-  >
-    Play
-  </button>
   <div
     className="small-movie-card__image"
   >
     <img
       alt="Bohemian Rhapsody"
-      height="175"
+      height={175}
       src="img/bohemian-rhapsody.jpg"
-      width="280"
+      width={280}
     />
   </div>
   <h3

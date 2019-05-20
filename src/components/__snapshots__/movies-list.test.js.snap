@@ -6,22 +6,17 @@ exports[`MoviesList component loads correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
       <img
         alt="Bohemian Rhapsody"
-        height="175"
+        height={175}
         src="img/bohemian-rhapsody.jpg"
-        width="280"
+        width={280}
       />
     </div>
     <h3
@@ -37,22 +32,17 @@ exports[`MoviesList component loads correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
       <img
         alt="Aviator"
-        height="175"
+        height={175}
         src="img/aviator.jpg"
-        width="280"
+        width={280}
       />
     </div>
     <h3
@@ -68,22 +58,17 @@ exports[`MoviesList component loads correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
       <img
         alt="What We Do in the Shadows"
-        height="175"
+        height={175}
         src="img/what-we-do-in-the-shadows.jpg"
-        width="280"
+        width={280}
       />
     </div>
     <h3
@@ -99,22 +84,17 @@ exports[`MoviesList component loads correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
       <img
         alt="Snatch"
-        height="175"
+        height={175}
         src="img/snatch.jpg"
-        width="280"
+        width={280}
       />
     </div>
     <h3
@@ -130,22 +110,17 @@ exports[`MoviesList component loads correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
       <img
         alt="Revenant"
-        height="175"
+        height={175}
         src="img/revenant.jpg"
-        width="280"
+        width={280}
       />
     </div>
     <h3
