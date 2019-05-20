@@ -7,8 +7,7 @@ class MovieCard extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.msecondsTimer = 0;
-    this.intervalId = null;
+    this.timeoutId = null;
 
     this.previewHeight = 175;
     this.previewWidth = 280;
@@ -22,25 +21,18 @@ class MovieCard extends React.PureComponent {
   }
 
   startTimer() {
-    this.msecondsTimer = 0;
+    this.timeoutId = setTimeout(() => {
+      this.setState({showPlayer: true});
+    }, 1000);
 
-    this.intervalId = setInterval(() => {
-      this.msecondsTimer += 100;
-
-      if (this.msecondsTimer > 1000) {
-        this.setState({showPlayer: true});
-      }
-    }, 100);
-
-    this.props.onMovieSelect(this.props);
+    let movie = Object.assign({}, this.props);
+    delete movie.onMovieSelect;
+    this.props.onMovieSelect(movie);
   }
 
   resetTimer() {
-    this.msecondsTimer = 0;
-    clearInterval(this.intervalId);
-
+    clearTimeout(this.timeoutId);
     this.setState({showPlayer: false});
-
   }
 
   render() {
@@ -51,7 +43,7 @@ class MovieCard extends React.PureComponent {
     }
 
     return (
-      <article key={name} onMouseEnter={this.startTimer} onMouseLeave={this.resetTimer} className="small-movie-card catalog__movies-card">
+      <article onMouseEnter={this.startTimer} onMouseLeave={this.resetTimer} className="small-movie-card catalog__movies-card">
         <div className="small-movie-card__image">
           {videoPreview}
         </div>
@@ -67,7 +59,7 @@ MovieCard.propTypes = {
   name: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
-  onMovieSelect: PropTypes.func.isRequired
+  onMovieSelect: PropTypes.func
 };
 
 export default MovieCard;

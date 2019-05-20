@@ -9,7 +9,6 @@ Enzyme.configure({adapter: new Adapter()});
 it(`MovieCard component renders correctly and able to deal with item click`, () => {
   const fakeHover = jest.fn();
   const movie = movies[0];
-  movie.onMovieSelect = fakeHover;
 
   const app = shallow(<MovieCard id={movie.id} preview={movie.preview} name={movie.name} picture={movie.picture} onMovieSelect={fakeHover}/>);
   app.simulate(`mouseenter`);
