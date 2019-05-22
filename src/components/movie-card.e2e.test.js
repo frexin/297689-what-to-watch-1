@@ -10,7 +10,7 @@ it(`MovieCard component renders correctly and able to deal with item click`, () 
   const fakeHover = jest.fn();
   const movie = movies[0];
 
-  const app = shallow(<MovieCard id={movie.id} preview={movie.preview} name={movie.name} picture={movie.picture} onMovieSelect={fakeHover}/>);
+  const app = shallow(<MovieCard id={movie.id} preview={movie.preview} name={movie.name} picture={movie.picture} genre={movie.genre} onMovieSelect={fakeHover}/>);
   app.simulate(`mouseenter`);
 
   expect(fakeHover).toHaveBeenCalledWith(movie);

@@ -42,5 +42,6 @@ MoviesList.propTypes = {
     name: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
   })).isRequired
 };
