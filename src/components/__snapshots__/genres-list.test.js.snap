@@ -6,18 +6,6 @@ exports[`GenresList component loads correctly 1`] = `
 >
   <li
     className="catalog__genres-item 
-              catalog__genres-item--active"
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      All genres
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item 
               "
   >
     <a
@@ -25,43 +13,7 @@ exports[`GenresList component loads correctly 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Crime
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item 
-              "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Dramas
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item 
-              "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Horror
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item 
-              "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Romance
+      All
     </a>
   </li>
 </ul>
