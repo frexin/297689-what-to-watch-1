@@ -7,7 +7,7 @@ const withActiveItem = (Wrapped) => {
       super(props);
 
       this.state = {
-        activeItem: props.activeItem
+        activeItem: props.activeItem || null
       };
 
       this.changeActiveItem = this.changeActiveItem.bind(this);
@@ -22,7 +22,7 @@ const withActiveItem = (Wrapped) => {
     }
 
     render() {
-      return (<Wrapped activeItem={this.state.activeItem} onSelect={this.state.changeActiveItem} {...this.props} />);
+      return (<Wrapped activeItem={this.state.activeItem} onSelect={this.changeActiveItem} {...this.props} />);
     }
   }
 

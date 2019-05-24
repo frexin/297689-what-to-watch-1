@@ -9,6 +9,7 @@ import {movies} from "../mocks/films.js";
 import withActiveItem from "../hocs/with-active-item";
 
 const WrappedGenres = withActiveItem(GenresList);
+const WrappedMovies = withActiveItem(MoviesList);
 
 const prepareGenres = (moviesList) => {
   const genres = [`All genres`];
@@ -28,7 +29,7 @@ const MainPage = (props) => {
     <div className={`page-content`}>
       <section className={`catalog`}>
         <WrappedGenres genres={prepareGenres(movies)} activeItem={props.currentGenre} onSelect={props.onGenreSelect} />
-        <MoviesList movies={props.movies} />
+        <WrappedMovies movies={props.movies} />
       </section>
     </div>
   );

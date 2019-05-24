@@ -4,20 +4,6 @@ import MovieCard from './movie-card.jsx';
 
 class MoviesList extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeMovie: {}
-    };
-
-    this.onMovieSelect = this.onMovieSelect.bind(this);
-  }
-
-  onMovieSelect(selectedMovie) {
-    this.setState({activeMovie: selectedMovie});
-  }
-
   render() {
 
     return (
@@ -25,7 +11,7 @@ class MoviesList extends React.PureComponent {
         {
           this.props.movies.map((item) => {
             return (
-              <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.picture} preview={item.preview} onMovieSelect={this.onMovieSelect}/>
+              <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.picture} preview={item.preview} onMovieSelect={this.props.onSelect}/>
             );
           })
         }
@@ -43,5 +29,6 @@ MoviesList.propTypes = {
     picture: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-  })).isRequired
+  })).isRequired,
+  onSelect: PropTypes.func,
 };
