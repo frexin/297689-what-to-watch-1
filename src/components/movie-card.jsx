@@ -36,10 +36,10 @@ class MovieCard extends React.PureComponent {
   }
 
   render() {
-    let videoPreview = <img src={`img/${this.props.picture}`} alt={this.props.name} width={this.previewWidth} height={this.previewHeight} />;
+    let videoPreview = <img src={`${this.props.picture}`} alt={this.props.name} width={this.previewWidth} height={this.previewHeight} />;
 
     if (this.state.showPlayer) {
-      videoPreview = <MoviePlayer poster={`img/${this.props.picture}`} src={this.props.preview} mute={true} width={this.previewWidth} height={this.previewHeight} />;
+      videoPreview = <MoviePlayer poster={`${this.props.picture}`} src={this.props.preview} mute={true} width={this.previewWidth} height={this.previewHeight} />;
     }
 
     return (
