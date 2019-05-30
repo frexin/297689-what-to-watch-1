@@ -22,7 +22,6 @@ const Operation = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-
     case ActionType.LOAD_MOVIES:
       return Object.assign({}, state, {
         moviesList: action.payload
@@ -31,18 +30,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_GENRE:
       return Object.assign({}, state, {
         currentGenre: action.payload,
-      });
-
-    case ActionType.GET_MOVIES_BY_GENRE:
-      return Object.assign({}, state, {
-        moviesList: initialState.moviesList.filter((movie) => {
-          const genre = action.payload;
-          if (genre === `All genres`) {
-            return true;
-          }
-
-          return movie.genre === genre;
-        })
       });
   }
   return state;
@@ -57,10 +44,6 @@ const ActionCreator = {
   },
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
-    payload: genre
-  }),
-  getMoviesByGenre: (genre) => ({
-    type: ActionType.GET_MOVIES_BY_GENRE,
     payload: genre
   })
 };
