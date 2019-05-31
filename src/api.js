@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-export const createApi = (dispatch) => {
+export const createApi = () => {
   const api = axios.create({
     baseURL: `https://es31-server.appspot.com/wtw`,
     timeout: 5000,

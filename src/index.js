@@ -4,7 +4,7 @@ import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {compose} from "recompose";
 
-import {reducer, Operation} from './reducer.js';
+import {reducer, Operation} from './reducer/data.js';
 import {movies} from "./mocks/films.js";
 import MainPage from './components/main-page.jsx';
 import {Provider} from "react-redux";

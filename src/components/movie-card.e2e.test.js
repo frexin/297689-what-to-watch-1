@@ -9,9 +9,10 @@ Enzyme.configure({adapter: new Adapter()});
 it(`MovieCard component renders correctly and able to deal with item click`, () => {
   const fakeHover = jest.fn();
   const movie = movies[0];
+  const expectedMovie = {genre: `Crime`, id: 1, name: `Bohemian Rhapsody`, picture: `bohemian-rhapsody.jpg`, preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`};
 
-  const app = shallow(<MovieCard id={movie.id} preview={movie.preview} name={movie.name} picture={movie.picture} genre={movie.genre} onMovieSelect={fakeHover}/>);
+  const app = shallow(<MovieCard id={movie.id} preview={movie.preview_video_link} name={movie.name} picture={movie.preview_image} genre={movie.genre} onMovieSelect={fakeHover}/>);
   app.simulate(`mouseenter`);
 
-  expect(fakeHover).toHaveBeenCalledWith(movie);
+  expect(fakeHover).toHaveBeenCalledWith(expectedMovie);
 });

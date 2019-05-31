@@ -1,5 +1,3 @@
-import {movies} from './mocks/films.js';
-
 const initialState = {
   currentGenre: `All genres`,
   moviesList: []
@@ -13,8 +11,8 @@ const ActionType = {
 
 const Operation = {
   loadMovies: () => (dispatch, _getState, api) => {
-    return api.get('/films')
-        .then(resp => {
+    return api.get(`/films`)
+        .then((resp) => {
           dispatch(ActionCreator.loadMovies(resp.data));
         });
   }
@@ -40,7 +38,7 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_MOVIES,
       payload: movies
-    }
+    };
   },
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
