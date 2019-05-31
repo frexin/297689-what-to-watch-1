@@ -32,8 +32,8 @@ MainPage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    preview_image: PropTypes.string.isRequired,
-    preview_video_link: PropTypes.string.isRequired
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired
   })).isRequired,
   onGenreSelect: PropTypes.func.isRequired,
   currentGenre: PropTypes.string.isRequired,

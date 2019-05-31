@@ -1,3 +1,5 @@
+import adapter from './../adapter';
+
 const initialState = {
   currentGenre: `All genres`,
   moviesList: []
@@ -13,7 +15,8 @@ const Operation = {
   loadMovies: () => (dispatch, _getState, api) => {
     return api.get(`/films`)
         .then((resp) => {
-          dispatch(ActionCreator.loadMovies(resp.data));
+          const movies = adapter(resp.data);
+          dispatch(ActionCreator.loadMovies(movies));
         });
   }
 };
