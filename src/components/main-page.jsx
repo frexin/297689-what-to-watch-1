@@ -16,8 +16,7 @@ const MainPage = (props) => {
   return (
     <div className={`page-content`}>
       <section className={`catalog`}>
-        <WrappedGenres genres={props.genres} activeItem={props.currentGenre}
-                       onSelect={props.onGenreSelect}/>
+        <WrappedGenres genres={props.genres} activeItem={props.currentGenre} onSelect={props.onGenreSelect}/>
         <WrappedMovies movies={props.movies}/>
       </section>
     </div>
