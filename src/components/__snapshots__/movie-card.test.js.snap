@@ -12,7 +12,7 @@ exports[`MovieCard component loads correctly 1`] = `
     <img
       alt="Bohemian Rhapsody"
       height={175}
-      src="img/bohemian-rhapsody.jpg"
+      src="bohemian-rhapsody.jpg"
       width={280}
     />
   </div>

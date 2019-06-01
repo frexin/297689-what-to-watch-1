@@ -11,7 +11,7 @@ class MoviesList extends React.PureComponent {
         {
           this.props.movies.map((item) => {
             return (
-              <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.picture} preview={item.preview} onMovieSelect={this.props.onSelect}/>
+              <MovieCard key={`item-${item.id}`} id={item.id} name={item.name} picture={item.previewImage} preview={item.previewVideoLink} onMovieSelect={this.props.onSelect}/>
             );
           })
         }
@@ -26,8 +26,8 @@ MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
   })).isRequired,
   onSelect: PropTypes.func,

@@ -85,7 +85,7 @@ exports[`Main components loads correctly 1`] = `
           <img
             alt="Bohemian Rhapsody"
             height={175}
-            src="img/bohemian-rhapsody.jpg"
+            src="bohemian-rhapsody.jpg"
             width={280}
           />
         </div>
@@ -111,7 +111,7 @@ exports[`Main components loads correctly 1`] = `
           <img
             alt="Aviator"
             height={175}
-            src="img/aviator.jpg"
+            src="aviator.jpg"
             width={280}
           />
         </div>
@@ -137,7 +137,7 @@ exports[`Main components loads correctly 1`] = `
           <img
             alt="What We Do in the Shadows"
             height={175}
-            src="img/what-we-do-in-the-shadows.jpg"
+            src="what-we-do-in-the-shadows.jpg"
             width={280}
           />
         </div>
@@ -163,7 +163,7 @@ exports[`Main components loads correctly 1`] = `
           <img
             alt="Snatch"
             height={175}
-            src="img/snatch.jpg"
+            src="snatch.jpg"
             width={280}
           />
         </div>
@@ -189,7 +189,7 @@ exports[`Main components loads correctly 1`] = `
           <img
             alt="Revenant"
             height={175}
-            src="img/revenant.jpg"
+            src="revenant.jpg"
             width={280}
           />
         </div>
