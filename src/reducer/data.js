@@ -1,14 +1,18 @@
-import adapter from './../adapter';
+import adapter from './../adapter.js';
 
 const initialState = {
   currentGenre: `All genres`,
-  moviesList: []
+  moviesList: [],
+  isAuthorizationRequired: true,
+  userData: {}
 };
 
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_USER: `LOAD_USER`,
   CHANGE_GENRE: `CHANGE_GENRE`,
-  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`
+  CHANGE_AUTH_REQUIRE: `CHANGE_AUTH_REQUIRE`,
+  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
 };
 
 const Operation = {
@@ -17,6 +21,14 @@ const Operation = {
         .then((resp) => {
           const movies = adapter(resp.data);
           dispatch(ActionCreator.loadMovies(movies));
+        });
+  },
+  auth: (email, password) => (dispatch, _getState, api) => {
+    return api.post(`/login`, {email: email, password: password})
+        .then((resp) => {
+          const userData = resp.data;
+          dispatch(ActionCreator.loadUser(userData));
+          dispatch(ActionCreator.changeAuthRequire(false));
         });
   }
 };
@@ -32,7 +44,18 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         currentGenre: action.payload,
       });
+
+    case ActionType.CHANGE_AUTH_REQUIRE:
+      return Object.assign({}, state, {
+        isAuthorizationRequired: action.payload
+      });
+
+    case ActionType.LOAD_USER:
+      return Object.assign({}, state, {
+        userData: action.payload
+      });
   }
+
   return state;
 };
 
@@ -46,7 +69,15 @@ const ActionCreator = {
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
     payload: genre
-  })
+  }),
+  changeAuthRequire: (authRequire) => ({
+    type: ActionType.CHANGE_AUTH_REQUIRE,
+    payload: authRequire
+  }),
+  loadUser: (userData) => ({
+    type: ActionType.LOAD_USER,
+    payload: userData
+  }),
 };
 
 export {
