@@ -9,7 +9,7 @@ import MainPage from './components/main-page.jsx';
 import {Provider} from "react-redux";
 import {createApi} from "./api.js";
 
-const api = createApi((...args) => store.dispatch(...args));
+const api = createApi();
 
 const store = createStore(reducer,
     compose(

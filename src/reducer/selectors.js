@@ -20,7 +20,7 @@ export const getGenresList = createSelector(
       const genres = [`All genres`];
 
       movies.forEach((item) => {
-        if (genres.indexOf(item.genre) === -1) {
+        if (!genres.includes(item.genre)) {
           genres.push(item.genre);
         }
       });

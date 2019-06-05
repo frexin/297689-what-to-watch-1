@@ -7,7 +7,7 @@ const adapter = (items) => {
 
     for (let key in item) {
       if (item.hasOwnProperty(key)) {
-        let camelKey = camelcase(key);
+        const camelKey = camelcase(key);
         transformed[camelKey] = item[key];
       }
     }
@@ -23,8 +23,7 @@ const adapter = (items) => {
     }
 
     return result;
-  }
-  else {
+  } else {
     return extractObject(items);
   }
 };

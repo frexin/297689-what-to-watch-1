@@ -23,13 +23,13 @@ const Operation = {
           dispatch(ActionCreator.loadMovies(movies));
         });
   },
-  auth: (email, password) => (dispatch, _getState, api) => {
-    return api.post(`/login`, {email: email, password: password})
+  auth: (e, p) => (dispatch, _getState, api) => {
+    return api.post(`/login`, {email: e, password: p})
         .then((resp) => {
           const userData = adapter(resp.data);
 
-          dispatch(ActionCreator.loadUser(userData));
           dispatch(ActionCreator.changeAuthRequire(false));
+          dispatch(ActionCreator.loadUser(userData));
         });
   },
   checkAuth: () => (dispatch, _getState, api) => {
@@ -37,8 +37,8 @@ const Operation = {
         .then((resp) => {
           const userData = adapter(resp.data);
 
-          dispatch(ActionCreator.loadUser(userData));
           dispatch(ActionCreator.changeAuthRequire(false));
+          dispatch(ActionCreator.loadUser(userData));
         }).catch(() => {
           dispatch(ActionCreator.changeAuthRequire(true));
         });

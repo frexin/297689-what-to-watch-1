@@ -19,37 +19,36 @@ const MainPage = (props) => {
   if (props.user) {
     userBlock = <div className="user-block__avatar">
       <img src={`https://es31-server.appspot.com/` + props.user.avatarUrl} alt="User avatar" width="63" height="63"/>
-    </div>
-  }
-  else {
-    userBlock = <a href="#" className="user-block__link">Sign in</a>
+    </div>;
+  } else {
+    userBlock = <a href="/login" className="user-block__link">Sign in</a>;
   }
 
   if (props.authRequire) {
     return (
-        <SignIn onFormSubmit={props.onFormSubmit}/>
+      <SignIn onFormSubmit={props.onFormSubmit}/>
     );
   } else {
     return (
-        <Fragment>
-          <header className="page-header">
-            <div className="logo">
-              <a className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">{userBlock}</div>
-          </header>
-          <div className={`page-content`}>
-            <section className={`catalog`}>
-              <WrappedGenres genres={props.genres} activeItem={props.currentGenre} onSelect={props.onGenreSelect}/>
-              <WrappedMovies movies={props.movies}/>
-            </section>
+      <Fragment>
+        <header className="page-header">
+          <div className="logo">
+            <a className="logo__link">
+              <span className="logo__letter logo__letter--1">W</span>
+              <span className="logo__letter logo__letter--2">T</span>
+              <span className="logo__letter logo__letter--3">W</span>
+            </a>
           </div>
-        </Fragment>
+
+          <div className="user-block">{userBlock}</div>
+        </header>
+        <div className={`page-content`}>
+          <section className={`catalog`}>
+            <WrappedGenres genres={props.genres} activeItem={props.currentGenre} onSelect={props.onGenreSelect}/>
+            <WrappedMovies movies={props.movies}/>
+          </section>
+        </div>
+      </Fragment>
     );
   }
 };
@@ -69,7 +68,6 @@ MainPage.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     email: PropTypes.string,
-    avatarUrl: PropTypes.string,
   }),
   onGenreSelect: PropTypes.func.isRequired,
   currentGenre: PropTypes.string.isRequired,
