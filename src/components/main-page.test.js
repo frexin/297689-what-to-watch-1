@@ -5,14 +5,28 @@ import {getGenresList} from './../reducer/selectors';
 
 import {movies} from "../mocks/films";
 
-it(`Main components loads correctly`, () => {
-  const state = {
-    currentGenre: `All genres`,
-    moviesList: movies
+const state = {
+  currentGenre: `All genres`,
+  moviesList: movies,
+};
+
+const genres = getGenresList(state);
+
+it(`Main component shows default page`, () => {
+
+  const user = {
+    id: 1,
+    email: `Oliver.conner@gmail.com`,
+    name: `Oliver.conner`
   };
 
-  const genres = getGenresList(state);
-  const tree = renderer.create(<MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} movies={movies} />).toJSON();
+  const tree = renderer.create(<MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} user={user} movies={movies}/>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Main component shows signin page`, () => {
+  const tree = renderer.create(<MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} user={null} movies={movies}/>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

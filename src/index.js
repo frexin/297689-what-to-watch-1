@@ -5,12 +5,11 @@ import thunk from "redux-thunk";
 import {compose} from "recompose";
 
 import {reducer, Operation} from './reducer/data.js';
-import {movies} from "./mocks/films.js";
 import MainPage from './components/main-page.jsx';
 import {Provider} from "react-redux";
 import {createApi} from "./api.js";
 
-const api = createApi((...args) => store.dispatch(...args));
+const api = createApi();
 
 const store = createStore(reducer,
     compose(
@@ -19,8 +18,9 @@ const store = createStore(reducer,
     )
 );
 
+store.dispatch(Operation.checkAuth());
 store.dispatch(Operation.loadMovies());
 
 ReactDOM.render(
-    <Provider store={store}><MainPage movies={movies}/></Provider>,
+    <Provider store={store}><MainPage /></Provider>,
     document.getElementById(`root`));
