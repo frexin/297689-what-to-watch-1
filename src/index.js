@@ -18,6 +18,7 @@ const store = createStore(reducer,
     )
 );
 
+store.dispatch(Operation.checkAuth());
 store.dispatch(Operation.loadMovies());
 
 ReactDOM.render(

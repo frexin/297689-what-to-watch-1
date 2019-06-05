@@ -1,9 +1,8 @@
 import camelcase from 'camelcase';
 
 const adapter = (items) => {
-  const result = [];
 
-  for (let item of items) {
+  function extractObject(item) {
     const transformed = {};
 
     for (let key in item) {
@@ -13,10 +12,21 @@ const adapter = (items) => {
       }
     }
 
-    result.push(transformed);
+    return transformed;
   }
 
-  return result;
+  if (Array.isArray(items)) {
+    const result = [];
+
+    for (let item of items) {
+      result.push(extractObject(item));
+    }
+
+    return result;
+  }
+  else {
+    return extractObject(items);
+  }
 };
 
 export default adapter;

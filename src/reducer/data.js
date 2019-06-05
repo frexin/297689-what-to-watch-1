@@ -3,8 +3,8 @@ import adapter from './../adapter.js';
 const initialState = {
   currentGenre: `All genres`,
   moviesList: [],
-  isAuthorizationRequired: true,
-  userData: {}
+  isAuthorizationRequired: false,
+  userData: null
 };
 
 const ActionType = {
@@ -26,11 +26,23 @@ const Operation = {
   auth: (email, password) => (dispatch, _getState, api) => {
     return api.post(`/login`, {email: email, password: password})
         .then((resp) => {
-          const userData = resp.data;
+          const userData = adapter(resp.data);
+
           dispatch(ActionCreator.loadUser(userData));
           dispatch(ActionCreator.changeAuthRequire(false));
         });
-  }
+  },
+  checkAuth: () => (dispatch, _getState, api) => {
+    return api.get(`/login`)
+        .then((resp) => {
+          const userData = adapter(resp.data);
+
+          dispatch(ActionCreator.loadUser(userData));
+          dispatch(ActionCreator.changeAuthRequire(false));
+        }).catch(() => {
+          dispatch(ActionCreator.changeAuthRequire(true));
+        });
+  },
 };
 
 const reducer = (state = initialState, action) => {
