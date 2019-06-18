@@ -1,13 +1,13 @@
 import React, {Fragment} from "react";
 import PropTypes from 'prop-types';
 
-import MoviesList from './movies-list.jsx';
-import GenresList from "./genres-list.jsx";
-import SignIn from './sign-in.jsx';
-import {ActionCreator, Operation} from "../reducer/data.js";
+import MoviesList from '../movies-list/movies-list.jsx';
+import GenresList from "../genres-list/genres-list.jsx";
+import {ActionCreator, Operation} from "../../reducer/data.js";
 import {connect} from "react-redux";
-import withActiveItem from "../hocs/with-active-item";
-import {getMoviesForGenre, getGenresList} from "../reducer/selectors.js";
+import withActiveItem from "../../hocs/with-active-item";
+import {getMoviesForGenre, getGenresList} from "../../reducer/selectors.js";
+import {Link} from "react-router-dom";
 
 const WrappedGenres = withActiveItem(GenresList);
 const WrappedMovies = withActiveItem(MoviesList);
@@ -21,7 +21,7 @@ const MainPage = (props) => {
       <img src={`https://es31-server.appspot.com/` + props.user.avatarUrl} alt="User avatar" width="63" height="63"/>
     </div>;
   } else {
-    userBlock = <a href="/login" className="user-block__link">Sign in</a>;
+    userBlock = <Link to="/login" className="user-block__link">Sign in</Link>
   }
 
   return (

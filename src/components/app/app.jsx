@@ -1,17 +1,19 @@
 import {Route, Switch} from 'react-router-dom';
-import MainPage from './main-page.jsx';
-import SignIn from './sign-in.jsx';
+import MainPage from '../main-page/main-page.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
 import React from "react";
-import {getGenresList, getMoviesForGenre} from "../reducer/selectors";
-import {ActionCreator, Operation} from "../reducer/data";
+import {ActionCreator, Operation} from "../../reducer/data";
 import {connect} from "react-redux";
+import Favorites from "../favorites/favorites.jsx";
+import withAuth from "../../hocs/with-auth.js";
 
 const App = (props) => {
 
   return (
     <Switch>
       <Route exact path="/" component={MainPage} />
-      <Route path="/login" render={() => <SignIn onFormSubmit={props.onFormSubmit} />} />
+      <Route path="/login" render={() => <SignIn onFormSubmit={props.onFormSubmit} authRequire={props.authRequire} />} />
+      <Route path="/mylist" component={withAuth(Favorites)} />
     </Switch>
   );
 };

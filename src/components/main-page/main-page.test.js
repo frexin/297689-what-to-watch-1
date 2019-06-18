@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {MainPage} from './main-page.jsx';
-import {getGenresList} from './../reducer/selectors';
+import {getGenresList} from '../../reducer/selectors';
 
-import {movies} from "../mocks/films";
+import {movies} from "../../mocks/films";
 
 const state = {
   currentGenre: `All genres`,

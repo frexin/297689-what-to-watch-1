@@ -6,11 +6,14 @@ import {compose} from "recompose";
 import {BrowserRouter} from "react-router-dom";
 
 import {reducer, Operation} from './reducer/data.js';
-import App from './components/app.jsx';
+import App from './components/app/app.jsx';
 import {Provider} from "react-redux";
 import {createApi} from "./api.js";
+import {createBrowserHistory} from 'history';
 
-const api = createApi();
+const history = createBrowserHistory();
+
+const api = createApi(() => history.push(`/login`));
 
 const store = createStore(reducer,
     compose(

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import MoviePlayer from "./movie-player.jsx";
+import MoviePlayer from "../movie-player/movie-player.jsx";
 
 class MovieCard extends React.PureComponent {
 

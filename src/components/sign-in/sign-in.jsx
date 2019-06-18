@@ -1,9 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
+
 
 class SignIn extends React.PureComponent {
 
   render() {
+
+    if (!this.props.authRequire) {
+      return (<Redirect to="/" />)
+    }
+
     return (
       <div className="sign-in user-page__content">
         <form action="#" onSubmit={this.props.onFormSubmit} className="sign-in__form">
