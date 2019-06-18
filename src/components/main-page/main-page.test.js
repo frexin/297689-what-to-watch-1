@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {MainPage} from './main-page.jsx';
 import {getGenresList} from '../../reducer/selectors';
+import {BrowserRouter} from "react-router-dom";
 
 import {movies} from "../../mocks/films";
 
@@ -20,13 +21,13 @@ it(`Main component shows default page`, () => {
     name: `Oliver.conner`
   };
 
-  const tree = renderer.create(<MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} user={user} movies={movies}/>).toJSON();
+  const tree = renderer.create(<BrowserRouter><MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} user={user} movies={movies}/></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it(`Main component shows signin page`, () => {
-  const tree = renderer.create(<MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} user={null} movies={movies}/>).toJSON();
+  const tree = renderer.create(<BrowserRouter><MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} user={null} movies={movies}/></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

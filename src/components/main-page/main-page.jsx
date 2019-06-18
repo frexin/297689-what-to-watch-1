@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresList from "../genres-list/genres-list.jsx";
-import {ActionCreator, Operation} from "../../reducer/data.js";
+import {ActionCreator} from "../../reducer/data.js";
 import {connect} from "react-redux";
 import withActiveItem from "../../hocs/with-active-item";
 import {getMoviesForGenre, getGenresList} from "../../reducer/selectors.js";
@@ -21,7 +21,7 @@ const MainPage = (props) => {
       <img src={`https://es31-server.appspot.com/` + props.user.avatarUrl} alt="User avatar" width="63" height="63"/>
     </div>;
   } else {
-    userBlock = <Link to="/login" className="user-block__link">Sign in</Link>
+    userBlock = <Link to="/login" className="user-block__link">Sign in</Link>;
   }
 
   return (
@@ -58,10 +58,11 @@ MainPage.propTypes = {
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired
   })).isRequired,
-  userData: PropTypes.shape({
+  user: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     email: PropTypes.string,
+    avatarUrl: PropTypes.string,
   }),
   onGenreSelect: PropTypes.func.isRequired,
   currentGenre: PropTypes.string.isRequired,
@@ -80,24 +81,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onGenreSelect: (genre) => {
       dispatch(ActionCreator.changeGenre(genre));
-    },
-    onFormSubmit: (event) => {
-      event.preventDefault();
-
-      let email = null;
-      let password = null;
-
-      for (let elem of event.target.elements) {
-        if (elem.name === `user-email`) {
-          email = elem.value;
-        }
-
-        if (elem.name === `user-password`) {
-          password = elem.value;
-        }
-      }
-
-      dispatch(Operation.auth(email, password));
     }
   };
 };

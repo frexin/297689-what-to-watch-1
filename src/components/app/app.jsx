@@ -2,10 +2,11 @@ import {Route, Switch} from 'react-router-dom';
 import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import React from "react";
-import {ActionCreator, Operation} from "../../reducer/data";
+import {Operation} from "../../reducer/data";
 import {connect} from "react-redux";
 import Favorites from "../favorites/favorites.jsx";
 import withAuth from "../../hocs/with-auth.js";
+import PropTypes from "prop-types";
 
 const App = (props) => {
 
@@ -25,25 +26,15 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFormSubmit: (event) => {
-      event.preventDefault();
-
-      let email = null;
-      let password = null;
-
-      for (let elem of event.target.elements) {
-        if (elem.name === `user-email`) {
-          email = elem.value;
-        }
-
-        if (elem.name === `user-password`) {
-          password = elem.value;
-        }
-      }
-
+    onFormSubmit: (email, password) => {
       dispatch(Operation.auth(email, password));
     }
   };
+};
+
+App.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired,
+  authRequire: PropTypes.bool.isRequired
 };
 
 export {App};
