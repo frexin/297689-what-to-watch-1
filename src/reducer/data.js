@@ -13,6 +13,7 @@ const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_AUTH_REQUIRE: `CHANGE_AUTH_REQUIRE`,
   GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
+  GET_MOVIE_BY_ID: `GET_MOVIE_BY_ID`
 };
 
 const Operation = {
@@ -57,6 +58,11 @@ const reducer = (state = initialState, action) => {
         currentGenre: action.payload,
       });
 
+    case ActionType.GET_MOVIE_BY_ID:
+      return Object.assign({}, state, {
+        movie: state.moviesList.filter((item) => item.id === action.payload)
+      });
+
     case ActionType.CHANGE_AUTH_REQUIRE:
       return Object.assign({}, state, {
         isAuthorizationRequired: action.payload
@@ -81,6 +87,10 @@ const ActionCreator = {
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
     payload: genre
+  }),
+  selectMovie: (movieId) => ({
+    type: ActionType.GET_MOVIE_BY_ID,
+    payload: movieId
   }),
   changeAuthRequire: (authRequire) => ({
     type: ActionType.CHANGE_AUTH_REQUIRE,
