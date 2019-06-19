@@ -3,7 +3,7 @@ import adapter from './../adapter.js';
 const initialState = {
   currentGenre: `All genres`,
   moviesList: [],
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   userData: null
 };
 
@@ -23,8 +23,8 @@ const Operation = {
           dispatch(ActionCreator.loadMovies(movies));
         });
   },
-  auth: (e, p) => (dispatch, _getState, api) => {
-    return api.post(`/login`, {email: e, password: p})
+  auth: (userEmail, userPassword) => (dispatch, _getState, api) => {
+    return api.post(`/login`, {email: userEmail, password: userPassword})
         .then((resp) => {
           const userData = adapter(resp.data);
 

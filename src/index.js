@@ -3,13 +3,17 @@ import ReactDOM from "react-dom";
 import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {compose} from "recompose";
+import {BrowserRouter} from "react-router-dom";
 
 import {reducer, Operation} from './reducer/data.js';
-import MainPage from './components/main-page.jsx';
+import App from './components/app/app.jsx';
 import {Provider} from "react-redux";
 import {createApi} from "./api.js";
+import {createBrowserHistory} from 'history';
 
-const api = createApi();
+const history = createBrowserHistory();
+
+const api = createApi(() => history.push(`/login`));
 
 const store = createStore(reducer,
     compose(
@@ -22,5 +26,9 @@ store.dispatch(Operation.checkAuth());
 store.dispatch(Operation.loadMovies());
 
 ReactDOM.render(
-    <Provider store={store}><MainPage /></Provider>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>,
     document.getElementById(`root`));

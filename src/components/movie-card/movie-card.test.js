@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {movies} from "../mocks/films";
+import {movies} from "../../mocks/films";
 import MovieCard from "./movie-card";
 
 it(`MovieCard component loads correctly`, () => {

@@ -1,12 +1,29 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
+
 
 class SignIn extends React.PureComponent {
 
+  handleFormSubmit(event) {
+    event.preventDefault();
+
+    const collection = event.target.elements;
+    const email = collection.namedItem(`user-email`).value;
+    const password = collection.namedItem(`user-password`).value;
+
+    this.props.onFormSubmit(email, password);
+  }
+
   render() {
+
+    if (!this.props.authRequire) {
+      return (<Redirect to="/" />);
+    }
+
     return (
       <div className="sign-in user-page__content">
-        <form action="#" onSubmit={this.props.onFormSubmit} className="sign-in__form">
+        <form action="#" onSubmit={ (ev) => this.handleFormSubmit(ev) } className="sign-in__form">
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" required />
@@ -27,7 +44,8 @@ class SignIn extends React.PureComponent {
 }
 
 SignIn.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired
+  onFormSubmit: PropTypes.func.isRequired,
+  authRequire: PropTypes.bool
 };
 
 export default SignIn;
