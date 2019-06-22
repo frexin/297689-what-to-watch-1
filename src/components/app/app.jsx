@@ -7,11 +7,9 @@ import {Operation} from "../../reducer/data";
 import {connect} from "react-redux";
 import Favorites from "../favorites/favorites.jsx";
 import withAuth from "../../hocs/with-auth.js";
-import {MovieDetails} from "../movie-details/movie-details.jsx";
+import MovieDetails from "../movie-details/movie-details.jsx";
 
 const App = (props) => {
-
-  console.log(props);
 
   return (
     <Switch>

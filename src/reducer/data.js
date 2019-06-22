@@ -60,7 +60,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_MOVIE_BY_ID:
       return Object.assign({}, state, {
-        movie: state.moviesList.filter((item) => item.id === action.payload)
+        movie: state.moviesList.filter((item) => item.id === action.payload)[0]
       });
 
     case ActionType.CHANGE_AUTH_REQUIRE:
