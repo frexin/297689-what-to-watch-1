@@ -7,7 +7,6 @@ import {compose} from 'recompose';
 const withAuth = (Wrapped) => {
 
   function WithAuth(props) {
-
     if (props.authRequire) {
       return (<Redirect to="/" />);
     }
