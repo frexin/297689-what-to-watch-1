@@ -24,7 +24,8 @@ exports[`MoviesList component loads correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="#"
+        href="/movie/1"
+        onClick={[Function]}
       >
         Bohemian Rhapsody
       </a>
@@ -50,7 +51,8 @@ exports[`MoviesList component loads correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="#"
+        href="/movie/2"
+        onClick={[Function]}
       >
         Aviator
       </a>
@@ -76,7 +78,8 @@ exports[`MoviesList component loads correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="#"
+        href="/movie/3"
+        onClick={[Function]}
       >
         What We Do in the Shadows
       </a>
@@ -102,7 +105,8 @@ exports[`MoviesList component loads correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="#"
+        href="/movie/4"
+        onClick={[Function]}
       >
         Snatch
       </a>
@@ -128,7 +132,8 @@ exports[`MoviesList component loads correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="#"
+        href="/movie/5"
+        onClick={[Function]}
       >
         Revenant
       </a>

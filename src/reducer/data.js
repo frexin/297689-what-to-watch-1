@@ -3,7 +3,7 @@ import adapter from './../adapter.js';
 const initialState = {
   currentGenre: `All genres`,
   moviesList: [],
-  isAuthorizationRequired: true,
+  isAuthorizationRequired: false,
   userData: null
 };
 

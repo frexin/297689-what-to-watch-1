@@ -7,16 +7,17 @@ import {Operation} from "../../reducer/data";
 import {connect} from "react-redux";
 import Favorites from "../favorites/favorites.jsx";
 import withAuth from "../../hocs/with-auth.js";
+import withLayout from "../../hocs/with-layout.js";
 import MovieDetails from "../movie-details/movie-details.jsx";
 
 const App = (props) => {
 
   return (
     <Switch>
-      <Route exact path="/" component={MainPage} />
+      <Route exact path="/" component={withLayout(MainPage)} />
       <Route path="/login" render={() => <SignIn onFormSubmit={props.onFormSubmit} authRequire={props.authRequire} />} />
-      <Route path="/mylist" component={withAuth(Favorites)} />
-      <Route path="/movie/:id" component={MovieDetails} />
+      <Route path="/mylist" component={withLayout(withAuth(Favorites))} />
+      <Route path="/movie/:id" component={withLayout(MovieDetails)} />
     </Switch>
   );
 };

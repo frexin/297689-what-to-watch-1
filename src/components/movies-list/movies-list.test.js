@@ -3,9 +3,10 @@ import renderer from 'react-test-renderer';
 
 import {movies} from "../../mocks/films";
 import MoviesList from "./movies-list";
+import {BrowserRouter} from "react-router-dom";
 
 it(`MoviesList component loads correctly`, () => {
-  const tree = renderer.create(<MoviesList movies={movies} />).toJSON();
+  const tree = renderer.create(<BrowserRouter><MoviesList movies={movies} /></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
