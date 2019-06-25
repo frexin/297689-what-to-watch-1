@@ -15,7 +15,9 @@ const MovieTabDetails = (props) => {
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Starring</strong>
-          <span className="movie-card__details-value">{movie.starring.map((artist) => <Fragment>{artist} <br /></Fragment>)}</span>
+          <span className="movie-card__details-value">
+            {movie.starring.map((artist, index) => <Fragment key={`item-${index}`}>{artist} <br /></Fragment>)}
+          </span>
         </p>
       </div>
 

@@ -6,6 +6,7 @@ import {ActionCreator, Operation} from "../../reducer/data.js";
 import Tabs from "./../tabs/tabs.jsx";
 import MovieTabOverview from "../movie-tab-overview/movie-tab-overview.jsx";
 import MovieTabDetails from "../movie-tab-details/movie-tab-details.jsx";
+import MovieTabReviews from "../movie-tab-reviews/movie-tab-reviews.jsx";
 
 class MovieDetails extends React.Component {
 
@@ -82,7 +83,7 @@ class MovieDetails extends React.Component {
               </div>
 
               <div className="movie-card__desc">
-                <Tabs movie={movie} components={[MovieTabOverview, MovieTabDetails]} />
+                <Tabs components={[MovieTabOverview, MovieTabDetails, MovieTabReviews]} {...this.props} />
               </div>
             </div>
           </div>
@@ -94,13 +95,15 @@ class MovieDetails extends React.Component {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   movie: state.movie,
-  moviesList: state.moviesList
+  moviesList: state.moviesList,
+  reviews: state.reviews
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onMoviesLoaded: (movieId) => {
       dispatch(ActionCreator.selectMovie(movieId));
+      dispatch(Operation.loadReviews(movieId));
     },
     onComponentReady: () => {
       dispatch(Operation.loadMovies());
@@ -114,6 +117,7 @@ MovieDetails.propTypes = {
   onMoviesLoaded: PropTypes.func,
   onComponentReady: PropTypes.func,
   movie: PropTypes.object,
+  reviews: PropTypes.array,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string

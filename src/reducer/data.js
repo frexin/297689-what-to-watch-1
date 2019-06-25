@@ -4,11 +4,13 @@ const initialState = {
   currentGenre: `All genres`,
   moviesList: [],
   isAuthorizationRequired: false,
-  userData: null
+  userData: null,
+  reviews: []
 };
 
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_USER: `LOAD_USER`,
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_AUTH_REQUIRE: `CHANGE_AUTH_REQUIRE`,
@@ -33,6 +35,13 @@ const Operation = {
           dispatch(ActionCreator.loadUser(userData));
         });
   },
+  loadReviews: (filmId) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${filmId}`)
+        .then((resp) => {
+          const reviews = resp.data;
+          dispatch(ActionCreator.loadReviews(reviews));
+        });
+  },
   checkAuth: () => (dispatch, _getState, api) => {
     return api.get(`/login`)
         .then((resp) => {
@@ -51,6 +60,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_MOVIES:
       return Object.assign({}, state, {
         moviesList: action.payload
+      });
+
+    case ActionType.LOAD_REVIEWS:
+      return Object.assign({}, state, {
+        reviews: action.payload
       });
 
     case ActionType.CHANGE_GENRE:
@@ -82,6 +96,12 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_MOVIES,
       payload: movies
+    };
+  },
+  loadReviews: (reviews) => {
+    return {
+      type: ActionType.LOAD_REVIEWS,
+      payload: reviews
     };
   },
   changeGenre: (genre) => ({

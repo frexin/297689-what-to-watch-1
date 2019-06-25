@@ -36,7 +36,7 @@ class Tabs extends React.PureComponent {
             </li>
           </ul>
         </nav>
-        <TabComponent movie={this.props.movie} />
+        <TabComponent {...this.props} />
         </Fragment>
     );
   }
