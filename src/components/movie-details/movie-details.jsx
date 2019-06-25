@@ -10,7 +10,7 @@ class MovieDetails extends React.Component {
   componentDidUpdate() {
     const movieId = parseInt(this.props.match.params.id, 10);
 
-    if (this.props.movie && this.props.moviesList.length) {
+    if (!this.props.movie && this.props.moviesList.length) {
       this.props.onMoviesLoaded(movieId);
     }
 
