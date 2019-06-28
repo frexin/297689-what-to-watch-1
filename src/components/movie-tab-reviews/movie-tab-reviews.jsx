@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import moment from "moment";
 
 const MovieTabReviews = (props) => {
 
@@ -7,7 +7,6 @@ const MovieTabReviews = (props) => {
 
   return (
     <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
         {reviews.map((review) => {
           return (
             <div className="review" key={`item-${review.id}`}>
@@ -16,15 +15,14 @@ const MovieTabReviews = (props) => {
 
                 <footer className="review__details">
                   <cite className="review__author">{review.user.name}</cite>
-                  <time className="review__date" dateTime={review.date}>{review.date}</time>
+                  <time className="review__date" dateTime={review.date}>{moment(review.date).format(`MMMM Do, YYYY`)}</time>
                 </footer>
               </blockquote>
 
               <div className="review__rating">{review.rating}</div>
             </div>
           )
-        })};
-      </div>
+        })}
     </div>
   )
 };

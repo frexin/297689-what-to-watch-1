@@ -2,10 +2,12 @@ import adapter from './../adapter.js';
 
 const initialState = {
   currentGenre: `All genres`,
+  currentMovie: null,
   moviesList: [],
   isAuthorizationRequired: false,
   userData: null,
-  reviews: []
+  reviews: [],
+  similarMovies: []
 };
 
 const ActionType = {
@@ -35,11 +37,11 @@ const Operation = {
           dispatch(ActionCreator.loadUser(userData));
         });
   },
-  loadReviews: (filmId) => (dispatch, _getState, api) => {
+  loadMovie: (filmId) => (dispatch, _getState, api) => {
     return api.get(`/comments/${filmId}`)
         .then((resp) => {
           const reviews = resp.data;
-          dispatch(ActionCreator.loadReviews(reviews));
+          dispatch(ActionCreator.loadReviews([reviews, filmId]));
         });
   },
   checkAuth: () => (dispatch, _getState, api) => {
@@ -64,7 +66,8 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_REVIEWS:
       return Object.assign({}, state, {
-        reviews: action.payload
+        reviews: action.payload[0],
+        currentMovie: state.moviesList.filter((item) => item.id === action.payload[1])[0]
       });
 
     case ActionType.CHANGE_GENRE:
@@ -74,7 +77,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_MOVIE_BY_ID:
       return Object.assign({}, state, {
-        movie: state.moviesList.filter((item) => item.id === action.payload)[0]
+        currentMovie: state.moviesList.filter((item) => item.id === action.payload)[0]
       });
 
     case ActionType.CHANGE_AUTH_REQUIRE:
@@ -98,10 +101,10 @@ const ActionCreator = {
       payload: movies
     };
   },
-  loadReviews: (reviews) => {
+  loadReviews: (data) => {
     return {
       type: ActionType.LOAD_REVIEWS,
-      payload: reviews
+      payload: data
     };
   },
   changeGenre: (genre) => ({

@@ -7,13 +7,17 @@ import Tabs from "./../tabs/tabs.jsx";
 import MovieTabOverview from "../movie-tab-overview/movie-tab-overview.jsx";
 import MovieTabDetails from "../movie-tab-details/movie-tab-details.jsx";
 import MovieTabReviews from "../movie-tab-reviews/movie-tab-reviews.jsx";
+import MoviesList from "../movies-list/movies-list.jsx";
+import withActiveItem from "../../hocs/with-active-item";
+
+import {getSimilarMovies} from "../../reducer/selectors.js";
+const WrappedMovies = withActiveItem(MoviesList);
 
 class MovieDetails extends React.Component {
 
-  componentDidUpdate() {
-    const movieId = parseInt(this.props.match.params.id, 10);
-
-    if (!this.props.movie && this.props.moviesList.length) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      const movieId = parseInt(this.props.match.params.id, 10);
       this.props.onMoviesLoaded(movieId);
     }
 
@@ -21,11 +25,12 @@ class MovieDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onComponentReady();
+    const movieId = parseInt(this.props.match.params.id, 10);
+
+    this.props.onMoviesLoaded(movieId);
   }
 
   render() {
-
     const movie = this.props.movie;
 
     if (!movie) {
@@ -88,22 +93,43 @@ class MovieDetails extends React.Component {
             </div>
           </div>
         </section>
+        <div className="page-content">
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+
+            <WrappedMovies movies={this.props.similarMovies} />
+          </section>
+
+          <footer className="page-footer">
+            <div className="logo">
+              <a href="main.html" className="logo__link logo__link--light">
+                <span className="logo__letter logo__letter--1">W</span>
+                <span className="logo__letter logo__letter--2">T</span>
+                <span className="logo__letter logo__letter--3">W</span>
+              </a>
+            </div>
+
+            <div className="copyright">
+              <p>© 2019 What to watch Ltd.</p>
+            </div>
+          </footer>
+        </div>
       </Fragment>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  movie: state.movie,
+  movie: state.currentMovie,
   moviesList: state.moviesList,
-  reviews: state.reviews
+  reviews: state.reviews,
+  similarMovies: getSimilarMovies(state)
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onMoviesLoaded: (movieId) => {
-      dispatch(ActionCreator.selectMovie(movieId));
-      dispatch(Operation.loadReviews(movieId));
+      dispatch(Operation.loadMovie(movieId));
     },
     onComponentReady: () => {
       dispatch(Operation.loadMovies());

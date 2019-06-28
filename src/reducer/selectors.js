@@ -2,6 +2,7 @@ import {createSelector} from "reselect";
 
 const getGenreFilter = (state) => state.currentGenre;
 const getMovies = (state) => state.moviesList;
+const getMovieGenre = (state) => state.currentMovie;
 
 export const getMoviesForGenre = createSelector(
     [getGenreFilter, getMovies], (genreFilter, movies) => {
@@ -12,6 +13,14 @@ export const getMoviesForGenre = createSelector(
 
         return movie.genre === genreFilter;
       });
+    }
+);
+
+export const getSimilarMovies = createSelector(
+    [getMovieGenre, getMovies], (movie, movies) => {
+      const similarMovies = movies.filter((item) => movie && item.genre === movie.genre);
+
+      return similarMovies.slice(0, 4);
     }
 );
 
