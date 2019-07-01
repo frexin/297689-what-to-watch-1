@@ -7,22 +7,11 @@ import {ActionCreator} from "../../reducer/data.js";
 import {connect} from "react-redux";
 import withActiveItem from "../../hocs/with-active-item";
 import {getMoviesForGenre, getGenresList} from "../../reducer/selectors.js";
-import {Link} from "react-router-dom";
 
 const WrappedGenres = withActiveItem(GenresList);
 const WrappedMovies = withActiveItem(MoviesList);
 
 const MainPage = (props) => {
-
-  let userBlock = null;
-
-  if (props.user) {
-    userBlock = <div className="user-block__avatar">
-      <img src={`https://es31-server.appspot.com/` + props.user.avatarUrl} alt="User avatar" width="63" height="63"/>
-    </div>;
-  } else {
-    userBlock = <Link to="/login" className="user-block__link">Sign in</Link>;
-  }
 
   return (
     <Fragment>
@@ -35,11 +24,11 @@ const MainPage = (props) => {
           </a>
         </div>
 
-        <div className="user-block">{userBlock}</div>
+        <div className="user-block">{props.userBlock}</div>
       </header>
       <div className={`page-content`}>
         <section className={`catalog`}>
-          <WrappedGenres genres={props.genres} activeItem={props.currentGenre} onSelect={props.onGenreSelect}/>
+          <WrappedGenres genres={props.genres} activeItem={props.currentGenre} onSelect={props.onGenreSelect} />
           <WrappedMovies movies={props.movies}/>
         </section>
       </div>
@@ -52,18 +41,13 @@ MainPage.defaultProps = {
 };
 
 MainPage.propTypes = {
+  userBlock: PropTypes.object,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired
   })).isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    avatarUrl: PropTypes.string,
-  }),
   onGenreSelect: PropTypes.func.isRequired,
   currentGenre: PropTypes.string.isRequired,
   genres: PropTypes.array.isRequired
@@ -74,7 +58,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genres: getGenresList(state),
   currentGenre: state.currentGenre,
   authRequire: state.isAuthorizationRequired,
-  user: state.userData
 });
 
 const mapDispatchToProps = (dispatch) => {

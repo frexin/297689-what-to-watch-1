@@ -30,18 +30,7 @@ Array [
     </div>
     <div
       className="user-block"
-    >
-      <div
-        className="user-block__avatar"
-      >
-        <img
-          alt="User avatar"
-          height="63"
-          src="https://es31-server.appspot.com/undefined"
-          width="63"
-        />
-      </div>
-    </div>
+    />
   </header>,
   <div
     className="page-content"
@@ -136,7 +125,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/movie/1"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -162,7 +152,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/movie/2"
+              onClick={[Function]}
             >
               Aviator
             </a>
@@ -188,7 +179,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/movie/3"
+              onClick={[Function]}
             >
               What We Do in the Shadows
             </a>
@@ -214,7 +206,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/movie/4"
+              onClick={[Function]}
             >
               Snatch
             </a>
@@ -240,256 +233,8 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="#"
-            >
-              Revenant
-            </a>
-          </h3>
-        </article>
-      </div>
-    </section>
-  </div>,
-]
-`;
-
-exports[`Main component shows signin page 1`] = `
-Array [
-  <header
-    className="page-header"
-  >
-    <div
-      className="logo"
-    >
-      <a
-        className="logo__link"
-      >
-        <span
-          className="logo__letter logo__letter--1"
-        >
-          W
-        </span>
-        <span
-          className="logo__letter logo__letter--2"
-        >
-          T
-        </span>
-        <span
-          className="logo__letter logo__letter--3"
-        >
-          W
-        </span>
-      </a>
-    </div>
-    <div
-      className="user-block"
-    >
-      <a
-        className="user-block__link"
-        href="/login"
-        onClick={[Function]}
-      >
-        Sign in
-      </a>
-    </div>
-  </header>,
-  <div
-    className="page-content"
-  >
-    <section
-      className="catalog"
-    >
-      <ul
-        className="catalog__genres-list"
-      >
-        <li
-          className="catalog__genres-item 
-              catalog__genres-item--active"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            All genres
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item 
-              "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item 
-              "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item 
-              "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Horror
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item 
-              "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Romance
-          </a>
-        </li>
-      </ul>
-      <div
-        className="page-content catalog__movies-list"
-      >
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Bohemian Rhapsody"
-              height={175}
-              src="bohemian-rhapsody.jpg"
-              width={280}
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Bohemian Rhapsody
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Aviator"
-              height={175}
-              src="aviator.jpg"
-              width={280}
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Aviator
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="What We Do in the Shadows"
-              height={175}
-              src="what-we-do-in-the-shadows.jpg"
-              width={280}
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              What We Do in the Shadows
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Snatch"
-              height={175}
-              src="snatch.jpg"
-              width={280}
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Snatch
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Revenant"
-              height={175}
-              src="revenant.jpg"
-              width={280}
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
+              href="/movie/5"
+              onClick={[Function]}
             >
               Revenant
             </a>

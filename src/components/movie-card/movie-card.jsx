@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import MoviePlayer from "../movie-player/movie-player.jsx";
+import {Link} from "react-router-dom";
 
 class MovieCard extends React.PureComponent {
 
@@ -30,6 +31,10 @@ class MovieCard extends React.PureComponent {
     this.props.onMovieSelect(movie);
   }
 
+  componentWillUnmount() {
+    this.resetTimer();
+  }
+
   resetTimer() {
     clearTimeout(this.timeoutId);
     this.setState({showPlayer: false});
@@ -48,7 +53,8 @@ class MovieCard extends React.PureComponent {
           {videoPreview}
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="#">{this.props.name}</a>
+          <Link className="small-movie-card__link" to={{pathname: `/movie/${this.props.id}`
+          }}>{this.props.name}</Link>
         </h3>
       </article>);
   }

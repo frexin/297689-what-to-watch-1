@@ -21,7 +21,8 @@ exports[`MovieCard component loads correctly 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="#"
+      href="/movie/1"
+      onClick={[Function]}
     >
       Bohemian Rhapsody
     </a>
