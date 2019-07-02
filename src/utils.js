@@ -16,4 +16,13 @@ const getRatingDescription = (rating) => {
   return result;
 };
 
-export {getRatingDescription};
+const formatDuration = (durationInMinutes) => {
+  const hours = Math.floor(durationInMinutes / 60);
+  const minutes = Math.floor(durationInMinutes % 60);
+
+  const result = `${hours}h ${minutes}m`;
+
+  return result;
+};
+
+export {getRatingDescription, formatDuration};

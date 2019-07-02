@@ -2,13 +2,17 @@ import adapter from './../adapter.js';
 
 const initialState = {
   currentGenre: `All genres`,
+  currentMovie: null,
   moviesList: [],
   isAuthorizationRequired: false,
-  userData: null
+  userData: null,
+  reviews: [],
+  similarMovies: []
 };
 
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_USER: `LOAD_USER`,
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_AUTH_REQUIRE: `CHANGE_AUTH_REQUIRE`,
@@ -33,6 +37,13 @@ const Operation = {
           dispatch(ActionCreator.loadUser(userData));
         });
   },
+  loadMovie: (filmId) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${filmId}`)
+        .then((resp) => {
+          const reviews = resp.data;
+          dispatch(ActionCreator.loadReviews([reviews, filmId]));
+        });
+  },
   checkAuth: () => (dispatch, _getState, api) => {
     return api.get(`/login`)
         .then((resp) => {
@@ -53,6 +64,12 @@ const reducer = (state = initialState, action) => {
         moviesList: action.payload
       });
 
+    case ActionType.LOAD_REVIEWS:
+      return Object.assign({}, state, {
+        reviews: action.payload[0],
+        currentMovie: state.moviesList.filter((item) => item.id === action.payload[1])[0]
+      });
+
     case ActionType.CHANGE_GENRE:
       return Object.assign({}, state, {
         currentGenre: action.payload,
@@ -60,7 +77,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_MOVIE_BY_ID:
       return Object.assign({}, state, {
-        movie: state.moviesList.filter((item) => item.id === action.payload)[0]
+        currentMovie: state.moviesList.filter((item) => item.id === action.payload)[0]
       });
 
     case ActionType.CHANGE_AUTH_REQUIRE:
@@ -82,6 +99,12 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_MOVIES,
       payload: movies
+    };
+  },
+  loadReviews: (data) => {
+    return {
+      type: ActionType.LOAD_REVIEWS,
+      payload: data
     };
   },
   changeGenre: (genre) => ({

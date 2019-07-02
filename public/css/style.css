@@ -805,6 +805,7 @@ main {
   color: #131313; }
 
 .movie-card__reviews {
+  flex-wrap: wrap;
   padding-top: 20px; }
 
 .movie-card__reviews-col {
@@ -1119,13 +1120,20 @@ main {
   padding-top: 20px;
   padding-bottom: 20px;
   padding-right: 75px;
+  width: 46%;
+  margin-right: 60px;
+  max-width: 380px;
   position: relative;
   margin-bottom: 10px; }
+  .review:nth-child(2n) {
+    margin-right: 0;
+  }
   .review:last-child {
     margin-bottom: 0px;
     border-bottom: none; }
 
 .review__quote {
+  overflow: hidden;
   margin: 0;
   font-size: 17px;
   line-height: 24px; }
