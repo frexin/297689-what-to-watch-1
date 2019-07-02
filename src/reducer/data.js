@@ -3,7 +3,10 @@ import adapter from './../adapter.js';
 const initialState = {
   currentGenre: `All genres`,
   currentMovie: null,
+  moviesLimit: 20,
+  hasMoreMovies: true,
   moviesList: [],
+  fullMoviesList: [],
   isAuthorizationRequired: false,
   userData: null,
   reviews: [],
@@ -17,7 +20,8 @@ const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_AUTH_REQUIRE: `CHANGE_AUTH_REQUIRE`,
   GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
-  GET_MOVIE_BY_ID: `GET_MOVIE_BY_ID`
+  GET_MOVIE_BY_ID: `GET_MOVIE_BY_ID`,
+  EXTEND_MOVIES_LIMIT: `EXTEND_MOVIES_LIMIT`
 };
 
 const Operation = {
@@ -61,7 +65,9 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_MOVIES:
       return Object.assign({}, state, {
-        moviesList: action.payload
+        moviesList: action.moviesList.slice(0, state.moviesLimit),
+        fullMoviesList: action.moviesList,
+        hasMoreMovies: action.moviesList.length > state.moviesLimit
       });
 
     case ActionType.LOAD_REVIEWS:
@@ -89,6 +95,15 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         userData: action.payload
       });
+
+    case ActionType.EXTEND_MOVIES_LIMIT:
+      const newLimit = state.moviesLimit + 20;
+
+      return Object.assign({}, state, {
+        moviesLimit: newLimit,
+        moviesList: state.fullMoviesList.slice(0, newLimit),
+        hasMoreMovies: state.fullMoviesList.length > newLimit
+      });
   }
 
   return state;
@@ -98,7 +113,7 @@ const ActionCreator = {
   loadMovies: (movies) => {
     return {
       type: ActionType.LOAD_MOVIES,
-      payload: movies
+      moviesList: movies
     };
   },
   loadReviews: (data) => {
@@ -111,9 +126,8 @@ const ActionCreator = {
     type: ActionType.CHANGE_GENRE,
     payload: genre
   }),
-  selectMovie: (movieId) => ({
-    type: ActionType.GET_MOVIE_BY_ID,
-    payload: movieId
+  extendLimit: () => ({
+    type: ActionType.EXTEND_MOVIES_LIMIT
   }),
   changeAuthRequire: (authRequire) => ({
     type: ActionType.CHANGE_AUTH_REQUIRE,

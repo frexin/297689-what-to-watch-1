@@ -14,7 +14,7 @@ const state = {
 const genres = getGenresList(state);
 
 it(`Main component shows default page`, () => {
-  const tree = renderer.create(<BrowserRouter><MainPage genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} movies={movies}/></BrowserRouter>).toJSON();
+  const tree = renderer.create(<BrowserRouter><MainPage hasMoreMovies={false} onLoadMore={jest.fn()} genres={genres} currentGenre={`All genres`} onGenreSelect={jest.fn()} movies={movies}/></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

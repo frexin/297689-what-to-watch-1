@@ -97,7 +97,7 @@ class MovieDetails extends React.Component {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
 
-            <WrappedMovies movies={this.props.similarMovies} />
+            <WrappedMovies onLoadMore={() => {}} hasMoreMovies={false} movies={this.props.similarMovies} />
           </section>
 
           <footer className="page-footer">

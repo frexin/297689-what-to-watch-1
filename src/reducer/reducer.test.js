@@ -34,7 +34,7 @@ it(`Should make a correct API call to /films`, () => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
       type: ActionType.LOAD_MOVIES,
-      payload: [{fake: true}]
+      moviesList: [{fake: true}]
     });
   });
 });
