@@ -29,7 +29,7 @@ const MainPage = (props) => {
       <div className={`page-content`}>
         <section className={`catalog`}>
           <WrappedGenres genres={props.genres} activeItem={props.currentGenre} onSelect={props.onGenreSelect} />
-          <WrappedMovies movies={props.movies}/>
+          <WrappedMovies movies={props.movies} onLoadMore={props.onLoadMore} hasMoreMovies={props.hasMoreMovies} />
         </section>
       </div>
     </Fragment>
@@ -50,7 +50,9 @@ MainPage.propTypes = {
   })).isRequired,
   onGenreSelect: PropTypes.func.isRequired,
   currentGenre: PropTypes.string.isRequired,
-  genres: PropTypes.array.isRequired
+  genres: PropTypes.array.isRequired,
+  onLoadMore: PropTypes.func,
+  hasMoreMovies: PropTypes.bool
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -58,12 +60,16 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genres: getGenresList(state),
   currentGenre: state.currentGenre,
   authRequire: state.isAuthorizationRequired,
+  hasMoreMovies: state.hasMoreMovies
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onGenreSelect: (genre) => {
       dispatch(ActionCreator.changeGenre(genre));
+    },
+    onLoadMore: () => {
+      dispatch(ActionCreator.extendLimit());
     }
   };
 };
