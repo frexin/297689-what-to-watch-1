@@ -22,7 +22,7 @@ class Tabs extends React.PureComponent {
     const TabComponent = this.props.components[this.state.selectedIndex];
 
     return (
-        <Fragment>
+      <Fragment>
         <nav className="movie-nav movie-card__nav">
           <ul className="movie-nav__list">
             <li className={`movie-nav__item ${this.state.selectedIndex === 0 ? `movie-nav__item--active` : ``}`}>
@@ -37,9 +37,13 @@ class Tabs extends React.PureComponent {
           </ul>
         </nav>
         <TabComponent {...this.props} />
-        </Fragment>
+      </Fragment>
     );
   }
 }
+
+Tabs.propTypes = {
+  components: PropTypes.array.isRequired
+};
 
 export default Tabs;

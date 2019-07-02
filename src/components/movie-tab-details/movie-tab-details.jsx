@@ -39,4 +39,9 @@ const MovieTabDetails = (props) => {
   );
 };
 
+MovieTabDetails.propTypes = {
+  movie: PropTypes.object
+};
+
+
 export default MovieTabDetails;

@@ -23,6 +23,6 @@ const formatDuration = (durationInMinutes) => {
   const result = `${hours}h ${minutes}m`;
 
   return result;
-}
+};
 
 export {getRatingDescription, formatDuration};

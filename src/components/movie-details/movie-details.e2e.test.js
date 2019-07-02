@@ -3,14 +3,24 @@ import Enzyme, {mount} from 'enzyme/build';
 import Adapter from 'enzyme-adapter-react-16/build';
 import {MovieDetails} from "./movie-details.jsx";
 import {movies} from "../../mocks/films";
-import {BrowserRouter} from "react-router-dom";
+import {comments} from "../../mocks/reviews";
 
 
 Enzyme.configure({adapter: new Adapter()});
 
 it(`MovieDetails component is able to change active tab`, () => {
-  const fakeCallback = jest.fn();
+  const componentUpdate = jest.fn();
+  const movie = movies[0];
 
-  const app = mount(<BrowserRouter><MovieDetails onComponentReady={fakeCallback} onMoviesLoaded={fakeCallback} moviesList={movies} userBlock={{}} reviews={[]} /></BrowserRouter>);
-  expect(app.find(`.movie-card__nav .movie-nav__link`)).to.have.lengthOf(3);
+  const app = mount(<MovieDetails movie={movie} similarMovies={[]} onMoviesLoaded={componentUpdate} moviesList={movies} userBlock={<div>&nbsp;</div>} reviews={comments} match={{params: {id: `1`}}} />);
+  const tabs = app.find(`.movie-card__nav .movie-nav__link`);
+
+  expect(tabs).toHaveLength(3);
+  expect(componentUpdate).toHaveBeenCalledTimes(1);
+
+  app.setProps({match: {params: {id: `2`}}});
+  expect(componentUpdate).toHaveBeenLastCalledWith(2);
+
+  tabs.at(1).simulate(`click`);
+  expect(app.find(`.movie-card__details-name`)).toHaveLength(5);
 });

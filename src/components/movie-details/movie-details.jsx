@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
 import {connect} from "react-redux";
-import {ActionCreator, Operation} from "../../reducer/data.js";
+import {Operation} from "../../reducer/data.js";
 import Tabs from "./../tabs/tabs.jsx";
 import MovieTabOverview from "../movie-tab-overview/movie-tab-overview.jsx";
 import MovieTabDetails from "../movie-tab-details/movie-tab-details.jsx";
@@ -130,9 +130,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onMoviesLoaded: (movieId) => {
       dispatch(Operation.loadMovie(movieId));
-    },
-    onComponentReady: () => {
-      dispatch(Operation.loadMovies());
     }
   };
 };
@@ -140,8 +137,8 @@ const mapDispatchToProps = (dispatch) => {
 MovieDetails.propTypes = {
   userBlock: PropTypes.object,
   moviesList: PropTypes.array,
+  similarMovies: PropTypes.array,
   onMoviesLoaded: PropTypes.func,
-  onComponentReady: PropTypes.func,
   movie: PropTypes.object,
   reviews: PropTypes.array,
   match: PropTypes.shape({
