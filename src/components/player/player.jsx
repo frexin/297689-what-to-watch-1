@@ -1,9 +1,10 @@
-import React, {Fragment} from "react";
-import {Operation} from "../../reducer/data";
+import React from "react";
 import {connect} from "react-redux";
 import {formatPlayerDuration} from "../../utils.js";
 
-class Player extends React.Component  {
+import PropTypes from 'prop-types';
+
+class Player extends React.Component {
 
   constructor(props) {
     super(props);
@@ -24,17 +25,16 @@ class Player extends React.Component  {
   componentDidMount() {
     const node = this.getNode();
 
-    node.ontimeupdate  = () => {
+    node.ontimeupdate = () => {
       this.props.onProgress(this.getNode().currentTime);
-    }
+    };
   }
 
   getTotalDuration() {
     if (this.props.secondsPlayed) {
       const delta = this.getNode().duration - this.props.secondsPlayed;
       return new Date(delta * 1000).toISOString().substr(11, 8);
-    }
-    else {
+    } else {
       return formatPlayerDuration(this.props.movie.runTime);
     }
   }
@@ -42,8 +42,7 @@ class Player extends React.Component  {
   getProgress() {
     if (this.props.secondsPlayed) {
       return (this.props.secondsPlayed / this.getNode().duration) * 100;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -67,7 +66,6 @@ class Player extends React.Component  {
 
     if (movie) {
       return (
-        <Fragment>
         <div className="player">
           <video src={movie.videoLink} ref={this.videoTag} className="player__video" poster={movie.backgroundImage}>
             <source src={movie.videoLink} type="video/mp4" />
@@ -92,7 +90,7 @@ class Player extends React.Component  {
                 <span>Play</span>
               </button>
 
-              <button type="button" className={`player__play ${this.props.playing ? `` : `visually-hidden`}`}  onClick={this.pauseVideo}>
+              <button type="button" className={`player__play ${this.props.playing ? `` : `visually-hidden`}`} onClick={this.pauseVideo}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#pause"/>
                 </svg>
@@ -110,7 +108,6 @@ class Player extends React.Component  {
             </div>
           </div>
         </div>
-        </Fragment>
       );
     }
 
@@ -118,12 +115,13 @@ class Player extends React.Component  {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onMovieLoaded: (movieId) => {
-      dispatch(Operation.loadMovie(movieId));
-    }
-  };
+Player.propTypes = {
+  movie: PropTypes.object,
+  secondsPlayed: PropTypes.number,
+  playing: PropTypes.bool,
+  onProgress: PropTypes.func,
+  onClosePlayer: PropTypes.func,
+  onStatusUpdate: PropTypes.func
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -131,4 +129,4 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 export {Player};
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(mapStateToProps)(Player);

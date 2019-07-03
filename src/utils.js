@@ -26,7 +26,7 @@ function splitToMinutesAndHours(durationInMinutes) {
 const formatDuration = (durationInMinutes) => {
   const {hours, minutes} = splitToMinutesAndHours(durationInMinutes);
 
-  return`${hours}h ${minutes}m`;
+  return `${hours}h ${minutes}m`;
 };
 
 const formatPlayerDuration = (durationInMinutes) => {

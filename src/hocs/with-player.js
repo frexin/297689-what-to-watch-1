@@ -37,9 +37,13 @@ const withBigPlayer = (Wrapped) => {
     }
 
     render() {
-      return (<Wrapped player={<Player secondsPlayed={this.state.secondsPlayed} onProgress={this.progress} playing={this.state.isPlaying} onStatusUpdate={this.updateStatus} onClosePlayer={this.closePlayer} movie={this.props.movie} />} onOpenPlayer={this.openPlayer}  showPlayer={this.state.showPlayer} {...this.props} />);
+      return (<Wrapped player={<Player secondsPlayed={this.state.secondsPlayed} onProgress={this.progress} playing={this.state.isPlaying} onStatusUpdate={this.updateStatus} onClosePlayer={this.closePlayer} movie={this.props.movie} />} onOpenPlayer={this.openPlayer} showPlayer={this.state.showPlayer} {...this.props} />);
     }
   }
+
+  WithBigPlayer.propTypes = {
+    movie: PropTypes.object
+  };
 
   return WithBigPlayer;
 };
