@@ -21,7 +21,8 @@ const ActionType = {
   CHANGE_AUTH_REQUIRE: `CHANGE_AUTH_REQUIRE`,
   GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
   GET_MOVIE_BY_ID: `GET_MOVIE_BY_ID`,
-  EXTEND_MOVIES_LIMIT: `EXTEND_MOVIES_LIMIT`
+  EXTEND_MOVIES_LIMIT: `EXTEND_MOVIES_LIMIT`,
+  REVIEW_CREATED: `REVIEW_CREATED`
 };
 
 const Operation = {
@@ -39,6 +40,15 @@ const Operation = {
 
           dispatch(ActionCreator.changeAuthRequire(false));
           dispatch(ActionCreator.loadUser(userData));
+        });
+  },
+  addReview: (filmId, rating, comment) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${filmId}`, {rating: rating, comment: comment})
+        .then((resp) => {
+          const comments = adapter(resp.data);
+
+          dispatch(ActionCreator.loadReviews([comments, filmId]));
+          dispatch(ActionCreator.reviewCreated());
         });
   },
   loadMovie: (filmId) => (dispatch, _getState, api) => {
@@ -115,6 +125,17 @@ const ActionCreator = {
       type: ActionType.LOAD_MOVIES,
       moviesList: movies
     };
+  },
+  loadMovie: (id) => {
+    return {
+      type: ActionType.GET_MOVIE_BY_ID,
+      payload: id
+    };
+  },
+  reviewCreated: () => {
+    return {
+      type: ActionType.REVIEW_CREATED
+    }
   },
   loadReviews: (data) => {
     return {
