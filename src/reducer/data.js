@@ -22,7 +22,8 @@ const ActionType = {
   GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
   GET_MOVIE_BY_ID: `GET_MOVIE_BY_ID`,
   EXTEND_MOVIES_LIMIT: `EXTEND_MOVIES_LIMIT`,
-  REVIEW_CREATED: `REVIEW_CREATED`
+  REVIEW_CREATED: `REVIEW_CREATED`,
+  TOGGLE_FAVORITE: `TOGGLE_FAVORITE`
 };
 
 const Operation = {
@@ -40,6 +41,12 @@ const Operation = {
 
           dispatch(ActionCreator.changeAuthRequire(false));
           dispatch(ActionCreator.loadUser(userData));
+        });
+  },
+  toggleFavorite: (filmId, status) => (dispatch, _getState, api) => {
+    return api.post(`/favorite/${filmId}/${status}`)
+        .then(() => {
+          dispatch(ActionCreator.toggleFavorite(status));
         });
   },
   addReview: (filmId, rating, comment) => (dispatch, _getState, api) => {
@@ -91,6 +98,14 @@ const reducer = (state = initialState, action) => {
         currentGenre: action.payload,
       });
 
+    case ActionType.TOGGLE_FAVORITE:
+      const updatedMovie = state.currentMovie;
+      updatedMovie.isFavorite = action.payload;
+
+      return Object.assign({}, state, {
+        currentMovie: updatedMovie
+      });
+
     case ActionType.GET_MOVIE_BY_ID:
       return Object.assign({}, state, {
         currentMovie: state.moviesList.filter((item) => item.id === action.payload)[0]
@@ -135,6 +150,12 @@ const ActionCreator = {
   reviewCreated: () => {
     return {
       type: ActionType.REVIEW_CREATED
+    }
+  },
+  toggleFavorite: (status) => {
+    return {
+      type: ActionType.TOGGLE_FAVORITE,
+      payload: status
     }
   },
   loadReviews: (data) => {
