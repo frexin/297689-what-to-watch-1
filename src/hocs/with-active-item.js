@@ -10,10 +10,10 @@ const withActiveItem = (Wrapped) => {
         activeItem: props.activeItem || null
       };
 
-      this.changeActiveItem = this.changeActiveItem.bind(this);
+      this.handleActiveItem = this.handleActiveItem.bind(this);
     }
 
-    changeActiveItem(item) {
+    handleActiveItem(item) {
       this.setState({activeItem: item});
 
       if (this.props.onSelect) {
@@ -22,7 +22,7 @@ const withActiveItem = (Wrapped) => {
     }
 
     render() {
-      return (<Wrapped activeItem={this.state.activeItem} onSelect={this.changeActiveItem} {...this.props} />);
+      return (<Wrapped activeItem={this.state.activeItem} onSelect={this.handleActiveItem} {...this.props} />);
     }
   }
 

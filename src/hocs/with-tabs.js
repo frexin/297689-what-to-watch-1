@@ -11,16 +11,16 @@ const withTabs = (Wrapped) => {
         selectedIndex: 0
       };
 
-      this.selectTab = this.selectTab.bind(this);
+      this.handleTabSelect = this.handleTabSelect.bind(this);
     }
 
-    selectTab(index, ev) {
+    handleTabSelect(index, ev) {
       ev.preventDefault();
       this.setState({selectedIndex: index});
     }
 
     render() {
-      return (<Wrapped selectedIndex={this.state.selectedIndex} selectTab={this.selectTab} {...this.props} />);
+      return (<Wrapped selectedIndex={this.state.selectedIndex} onTabSelect={this.handleTabSelect} {...this.props} />);
     }
   }
 

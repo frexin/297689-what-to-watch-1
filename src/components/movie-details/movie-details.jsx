@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/data.js";
+import {Operation} from "../../reducer/reducer.js";
 import Tabs from "./../tabs/tabs.jsx";
 import MovieTabOverview from "../movie-tab-overview/movie-tab-overview.jsx";
 import MovieTabDetails from "../movie-tab-details/movie-tab-details.jsx";
@@ -106,13 +106,28 @@ class MovieDetails extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  movie: state.currentMovie,
-  moviesList: state.moviesList,
-  isFavorite: state.currentMovie ? +state.currentMovie.isFavorite : 0,
-  reviews: state.reviews,
-  similarMovies: getSimilarMovies(state)
-});
+const mapStateToProps = (state, ownProps) => {
+
+  const sortedReviews = state.reviews.sort((a, b) => {
+    if (a.id > b.id) {
+      return -1;
+    }
+
+    if (a.id < b.id) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  return Object.assign({}, ownProps, {
+    movie: state.currentMovie,
+    moviesList: state.moviesList,
+    isFavorite: state.currentMovie ? +state.currentMovie.isFavorite : 0,
+    reviews: sortedReviews,
+    similarMovies: getSimilarMovies(state)
+  });
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

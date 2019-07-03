@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 import {compose} from "recompose";
 import {Router} from "react-router-dom";
 
-import {reducer, Operation} from './reducer/data.js';
+import {reducer, Operation} from './reducer/reducer.js';
 import App from './components/app/app.jsx';
 import {Provider} from "react-redux";
 import {createApi} from "./api.js";

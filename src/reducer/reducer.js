@@ -1,10 +1,11 @@
 import adapter from './../adapter.js';
+import {MOVIES_LIMIT} from './../consts.js';
 
 const initialState = {
   currentGenre: `All genres`,
   currentMovie: null,
   promoMovie: null,
-  moviesLimit: 20,
+  moviesLimit: MOVIES_LIMIT,
   hasMoreMovies: true,
   moviesList: [],
   favMoviesList: [],
@@ -23,10 +24,8 @@ const ActionType = {
   LOAD_USER: `LOAD_USER`,
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_AUTH_REQUIRE: `CHANGE_AUTH_REQUIRE`,
-  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
   GET_MOVIE_BY_ID: `GET_MOVIE_BY_ID`,
   EXTEND_MOVIES_LIMIT: `EXTEND_MOVIES_LIMIT`,
-  REVIEW_CREATED: `REVIEW_CREATED`,
   TOGGLE_FAVORITE: `TOGGLE_FAVORITE`
 };
 
@@ -73,7 +72,6 @@ const Operation = {
           const comments = adapter(resp.data);
 
           dispatch(ActionCreator.loadReviews([comments, filmId]));
-          dispatch(ActionCreator.reviewCreated());
         });
   },
   loadMovie: (filmId) => (dispatch, _getState, api) => {
@@ -151,7 +149,7 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.EXTEND_MOVIES_LIMIT:
-      const newLimit = state.moviesLimit + 20;
+      const newLimit = state.moviesLimit + MOVIES_LIMIT;
 
       return Object.assign({}, state, {
         moviesLimit: newLimit,
@@ -186,11 +184,6 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_PROMO,
       payload: movie
-    };
-  },
-  reviewCreated: () => {
-    return {
-      type: ActionType.REVIEW_CREATED
     };
   },
   toggleFavorite: (status) => {

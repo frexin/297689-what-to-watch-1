@@ -1,0 +1,6 @@
+const MOVIES_LIMIT = 20;
+const RATINGS = {
+  LOW: 3, NORMAL: 5, AVERAGE: 8, GOOD: 9, VERY_GOOD: 10
+};
+
+export {MOVIES_LIMIT, RATINGS};

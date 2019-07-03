@@ -3,13 +3,13 @@ import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import React from "react";
 import PropTypes from "prop-types";
-import {Operation} from "../../reducer/data";
+import {Operation} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import Favorites from "../favorites/favorites.jsx";
 import withAuth from "../../hocs/with-auth.js";
 import withLayout from "../../hocs/with-layout.js";
 import withReviewForm from "../../hocs/with-review-form.js";
-import withBigPlayer from "../../hocs/with-player.js";
+import withBigPlayer from "../../hocs/with-big-player.js";
 import MovieDetails from "../movie-details/movie-details.jsx";
 import AddReview from "../add-review/add-review.jsx";
 

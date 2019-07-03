@@ -11,10 +11,10 @@ class Player extends React.PureComponent {
 
     this.videoTag = React.createRef();
 
-    this.playVideo = this.playVideo.bind(this);
-    this.pauseVideo = this.pauseVideo.bind(this);
+    this.handlePlayVideo = this.handlePlayVideo.bind(this);
+    this.handlePauseVideo = this.handlePauseVideo.bind(this);
     this.getTotalDuration = this.getTotalDuration.bind(this);
-    this.enterFullScreen = this.enterFullScreen.bind(this);
+    this.handleEnterFullScreen = this.handleEnterFullScreen.bind(this);
     this.getProgress = this.getProgress.bind(this);
   }
 
@@ -47,17 +47,17 @@ class Player extends React.PureComponent {
     }
   }
 
-  playVideo() {
+  handlePlayVideo() {
     this.props.onStatusUpdate(true);
     this.getNode().play();
   }
 
-  pauseVideo() {
+  handlePauseVideo() {
     this.props.onStatusUpdate(false);
     this.getNode().pause();
   }
 
-  enterFullScreen() {
+  handleEnterFullScreen() {
     this.getNode().requestFullscreen();
   }
 
@@ -83,14 +83,14 @@ class Player extends React.PureComponent {
             </div>
 
             <div className="player__controls-row">
-              <button type="button" className={`player__play ${!this.props.playing ? `` : `visually-hidden`}`} onClick={this.playVideo}>
+              <button type="button" className={`player__play ${!this.props.playing ? `` : `visually-hidden`}`} onClick={this.handlePlayVideo}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"/>
                 </svg>
                 <span>Play</span>
               </button>
 
-              <button type="button" className={`player__play ${this.props.playing ? `` : `visually-hidden`}`} onClick={this.pauseVideo}>
+              <button type="button" className={`player__play ${this.props.playing ? `` : `visually-hidden`}`} onClick={this.handlePauseVideo}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#pause"/>
                 </svg>
@@ -99,7 +99,7 @@ class Player extends React.PureComponent {
 
               <div className="player__name">{movie.name}</div>
 
-              <button type="button" className="player__full-screen" onClick={this.enterFullScreen}>
+              <button type="button" className="player__full-screen" onClick={this.handleEnterFullScreen}>
                 <svg viewBox="0 0 27 27" width="27" height="27">
                   <use xlinkHref="#full-screen"/>
                 </svg>

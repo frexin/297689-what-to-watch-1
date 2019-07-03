@@ -12,6 +12,6 @@ const MockComponentWrapped = withActiveItem(MockComponent);
 it(`HOC should change state in order to respond for callback`, () => {
   const wrap = shallow(<MockComponentWrapped/>);
 
-  wrap.instance().changeActiveItem(`test`);
+  wrap.instance().handleActiveItem(`test`);
   expect(wrap.state().activeItem).toEqual(`test`);
 });

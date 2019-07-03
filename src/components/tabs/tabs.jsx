@@ -9,13 +9,13 @@ const Tabs = (props) => {
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
           <li className={`movie-nav__item ${props.selectedIndex === 0 ? `movie-nav__item--active` : ``}`}>
-            <a href="#" onClick={(ev) => props.selectTab(0, ev)} className="movie-nav__link">Overview</a>
+            <a href="#" onClick={(ev) => props.onTabSelect(0, ev)} className="movie-nav__link">Overview</a>
           </li>
           <li className={`movie-nav__item ${props.selectedIndex === 1 ? `movie-nav__item--active` : ``}`}>
-            <a href="#" onClick={(ev) => props.selectTab(1, ev)} className="movie-nav__link">Details</a>
+            <a href="#" onClick={(ev) => props.onTabSelect(1, ev)} className="movie-nav__link">Details</a>
           </li>
           <li className={`movie-nav__item ${props.selectedIndex === 2 ? `movie-nav__item--active` : ``}`}>
-            <a href="#" onClick={(ev) => props.selectTab(2, ev)} className="movie-nav__link">Reviews</a>
+            <a href="#" onClick={(ev) => props.onTabSelect(2, ev)} className="movie-nav__link">Reviews</a>
           </li>
         </ul>
       </nav>
@@ -27,7 +27,7 @@ const Tabs = (props) => {
 Tabs.propTypes = {
   components: PropTypes.array.isRequired,
   selectedIndex: PropTypes.number,
-  selectTab: PropTypes.func
+  onTabSelect: PropTypes.func
 };
 
 export default Tabs;

@@ -24,7 +24,6 @@ class MoviesList extends React.PureComponent {
   }
 }
 
-export default MoviesList;
 
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
@@ -38,3 +37,5 @@ MoviesList.propTypes = {
   onLoadMore: PropTypes.func,
   hasMoreMovies: PropTypes.bool
 };
+
+export default MoviesList;

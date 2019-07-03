@@ -4,7 +4,7 @@ import {
   ActionType,
   reducer,
   Operation
-} from "./data";
+} from "./reducer";
 
 import {movies} from '../mocks/films.js';
 import {comments} from "../mocks/reviews.js";
@@ -113,6 +113,21 @@ it(`Reducer should load user`, () => {
     userData: `user`
   });
 });
+
+it(`Reducer should extend movies list`, () => {
+  expect(reducer({
+    moviesLimit: 1,
+    fullMoviesList: movies
+  }, {
+    type: ActionType.EXTEND_MOVIES_LIMIT,
+  })).toEqual({
+    moviesLimit: 21,
+    fullMoviesList: movies,
+    moviesList: movies,
+    hasMoreMovies: false
+  });
+});
+
 
 it(`Should make a correct API call to /films`, () => {
   const dispatch = jest.fn();

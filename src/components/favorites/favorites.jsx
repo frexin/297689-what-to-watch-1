@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import withActiveItem from "../../hocs/with-active-item";
 import MoviesList from "../movies-list/movies-list.jsx";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/data";
+import {Operation} from "../../reducer/reducer";
 
 const WrappedMovies = withActiveItem(MoviesList);
 

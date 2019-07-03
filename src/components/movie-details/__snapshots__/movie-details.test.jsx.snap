@@ -168,7 +168,9 @@ Array [
             >
               <span
                 className="movie-rating__level"
-              />
+              >
+                good
+              </span>
               <span
                 className="movie-rating__count"
               >

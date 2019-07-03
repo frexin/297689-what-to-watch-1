@@ -1,11 +1,19 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator, Operation} from "../reducer/data";
+import {ActionCreator, Operation} from "../reducer/reducer";
 import {compose} from 'recompose';
 
 const withReviewForm = (Wrapped) => {
   class WithReviewForm extends React.PureComponent {
+    static getFormValues(form) {
+      const collection = form.elements;
+      const rating = collection.namedItem(`rating`).value;
+      const comment = collection.namedItem(`review-text`).value;
+
+      return {rating, comment};
+    }
+
     constructor(props) {
       super(props);
 
@@ -23,14 +31,6 @@ const withReviewForm = (Wrapped) => {
       if (prevProps.movies !== this.props.movies) {
         this.props.onComponentLoaded(movieId);
       }
-    }
-
-    static getFormValues(form) {
-      const collection = form.elements;
-      const rating = collection.namedItem(`rating`).value;
-      const comment = collection.namedItem(`review-text`).value;
-
-      return {rating, comment};
     }
 
     validate(form) {
@@ -58,7 +58,7 @@ const withReviewForm = (Wrapped) => {
     }
 
     render() {
-      return (<Wrapped handleFormSubmit={this.handleFormSubmit} validate={this.validate} isValid={this.state.valid} {...this.props} />);
+      return (<Wrapped onFormSubmit={this.handleFormSubmit} validate={this.validate} isValid={this.state.valid} {...this.props} />);
     }
 
   }

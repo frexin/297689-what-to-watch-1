@@ -1,15 +1,17 @@
+import {RATINGS} from './consts.js';
+
 const getRatingDescription = (rating) => {
   let result = null;
 
-  if (rating <= 3) {
+  if (rating <= RATINGS.LOW) {
     result = `bad`;
-  } else if (rating > 3 && rating <= 5) {
+  } else if (rating > RATINGS.LOW && rating <= RATINGS.NORMAL) {
     result = `normal`;
-  } else if (rating > 5 && rating <= 8) {
+  } else if (rating > RATINGS.AVERAGE && rating <= RATINGS.GOOD) {
     result = `good`;
-  } else if (rating > 9 && rating <= 10) {
+  } else if (rating > RATINGS.GOOD && rating <= RATINGS.VERY_GOOD) {
     result = `very good`;
-  } else if (rating === 10) {
+  } else if (rating === RATINGS.VERY_GOOD) {
     result = `awesome`;
   }
 

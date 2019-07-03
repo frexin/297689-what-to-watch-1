@@ -8,7 +8,7 @@ const withAuth = (Wrapped) => {
 
   function WithAuth(props) {
     if (props.authRequire) {
-      return (<Redirect to="/" />);
+      return (<Redirect to="/login" />);
     }
 
     return <Wrapped {...props} />;

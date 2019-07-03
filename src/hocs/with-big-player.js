@@ -14,30 +14,30 @@ const withBigPlayer = (Wrapped) => {
         secondsPlayed: 0
       };
 
-      this.openPlayer = this.openPlayer.bind(this);
-      this.closePlayer = this.closePlayer.bind(this);
-      this.updateStatus = this.updateStatus.bind(this);
-      this.progress = this.progress.bind(this);
+      this.handleOpenPlayer = this.handleOpenPlayer.bind(this);
+      this.handleClosePlayer = this.handleClosePlayer.bind(this);
+      this.handleStatusUpdate = this.handleStatusUpdate.bind(this);
+      this.handleProgress = this.handleProgress.bind(this);
     }
 
-    updateStatus(status) {
+    handleStatusUpdate(status) {
       this.setState({isPlaying: status});
     }
 
-    openPlayer() {
+    handleOpenPlayer() {
       this.setState({showPlayer: true});
     }
 
-    closePlayer() {
+    handleClosePlayer() {
       this.setState({showPlayer: false});
     }
 
-    progress(seconds) {
+    handleProgress(seconds) {
       this.setState({secondsPlayed: seconds});
     }
 
     render() {
-      return (<Wrapped player={<Player secondsPlayed={this.state.secondsPlayed} onProgress={this.progress} playing={this.state.isPlaying} onStatusUpdate={this.updateStatus} onClosePlayer={this.closePlayer} movie={this.props.movie} />} onOpenPlayer={this.openPlayer} showPlayer={this.state.showPlayer} {...this.props} />);
+      return (<Wrapped player={<Player secondsPlayed={this.state.secondsPlayed} onProgress={this.handleProgress} playing={this.state.isPlaying} onStatusUpdate={this.handleStatusUpdate} onClosePlayer={this.handleClosePlayer} movie={this.props.movie} />} onOpenPlayer={this.handleOpenPlayer} showPlayer={this.state.showPlayer} {...this.props} />);
     }
   }
 

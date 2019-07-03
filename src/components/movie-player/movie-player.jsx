@@ -10,8 +10,6 @@ const MoviePlayer = (props) => {
   );
 };
 
-export default MoviePlayer;
-
 MoviePlayer.propTypes = {
   mute: PropTypes.bool,
   width: PropTypes.number,
@@ -19,3 +17,5 @@ MoviePlayer.propTypes = {
   poster: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
 };
+
+export default MoviePlayer;
