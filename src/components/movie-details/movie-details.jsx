@@ -37,6 +37,10 @@ class MovieDetails extends React.Component {
       return <Fragment/>;
     }
 
+    if (this.props.showPlayer) {
+      return <div>{this.props.player}</div>;
+    }
+
     return (
       <Fragment>
         <section className="movie-card movie-card--full">
@@ -66,7 +70,7 @@ class MovieDetails extends React.Component {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" type="button" onClick={this.props.onOpenPlayer}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                     </svg>
                     <span>Play</span>
@@ -136,6 +140,9 @@ const mapDispatchToProps = (dispatch) => {
 
 MovieDetails.propTypes = {
   userBlock: PropTypes.object,
+  player: PropTypes.object,
+  showPlayer: PropTypes.bool,
+  onOpenPlayer: PropTypes.func,
   moviesList: PropTypes.array,
   similarMovies: PropTypes.array,
   onMoviesLoaded: PropTypes.func,

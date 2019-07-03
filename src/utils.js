@@ -16,13 +16,23 @@ const getRatingDescription = (rating) => {
   return result;
 };
 
-const formatDuration = (durationInMinutes) => {
+function splitToMinutesAndHours(durationInMinutes) {
   const hours = Math.floor(durationInMinutes / 60);
   const minutes = Math.floor(durationInMinutes % 60);
 
-  const result = `${hours}h ${minutes}m`;
+  return {hours, minutes};
+}
 
-  return result;
+const formatDuration = (durationInMinutes) => {
+  const {hours, minutes} = splitToMinutesAndHours(durationInMinutes);
+
+  return `${hours}h ${minutes}m`;
 };
 
-export {getRatingDescription, formatDuration};
+const formatPlayerDuration = (durationInMinutes) => {
+  const {hours, minutes} = splitToMinutesAndHours(durationInMinutes);
+
+  return `${hours}:${minutes}:00`;
+};
+
+export {getRatingDescription, formatDuration, formatPlayerDuration};
