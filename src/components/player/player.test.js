@@ -5,10 +5,8 @@ import {movie} from "../../mocks/movie.js";
 import {Player} from "./player.jsx";
 
 it(`Player component loads correctly`, () => {
-  function mockGetRef(ref) {
+  function mockGetRef() {
     const contentRef = {ontimeupdate: () => {}, currentTime: 0};
-    this.contentRef = contentRef;
-
     return contentRef;
   }
 

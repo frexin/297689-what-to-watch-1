@@ -154,6 +154,7 @@ MovieDetails.propTypes = {
   moviesList: PropTypes.array,
   similarMovies: PropTypes.array,
   onMoviesLoaded: PropTypes.func,
+  toggleFavorite: PropTypes.func,
   movie: PropTypes.object,
   reviews: PropTypes.array,
   match: PropTypes.shape({

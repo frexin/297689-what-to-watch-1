@@ -103,7 +103,7 @@ Array [
         </li>
       </ul>
       <div
-        className="page-content catalog__movies-list"
+        className="catalog__movies-list"
       >
         <article
           className="small-movie-card catalog__movies-card"

@@ -12,9 +12,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 it(`MovieDetails component is able to change active tab`, () => {
   const componentUpdate = jest.fn();
-  const movie = movies[0];
-
-  const app = mount(<MemoryRouter><MovieDetails movie={movie} similarMovies={[]} onMoviesLoaded={componentUpdate} moviesList={movies} userBlock={<div>&nbsp;</div>} reviews={comments} match={{params: {id: `1`}}} /></MemoryRouter>);
+  const app = mount(<MemoryRouter><MovieDetails movie={movies[0]} similarMovies={[]} onMoviesLoaded={componentUpdate} moviesList={movies} userBlock={<div>&nbsp;</div>} reviews={comments} match={{params: {id: `1`}}} /></MemoryRouter>);
   const tabs = app.find(`.movie-card__nav .movie-nav__link`);
 
   expect(tabs).toHaveLength(3);
