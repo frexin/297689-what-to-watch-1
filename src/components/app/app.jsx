@@ -20,7 +20,7 @@ const App = (props) => {
       <Route exact path="/" component={withLayout(withBigPlayer(MainPage))} />
       <Route path="/login" render={() => <SignIn onFormSubmit={props.onFormSubmit} authRequire={props.authRequire} />} />
       <Route path="/mylist" component={withLayout(withAuth(Favorites))} />
-      <Route exact path="/film/:id" component={withBigPlayer(MovieDetails)} />
+      <Route exact path="/film/:id" component={withLayout(withBigPlayer(MovieDetails))} />
       <Route path="/films/:id/review" component={withLayout(withAuth(withReviewForm(AddReview)))} />
     </Switch>
   );

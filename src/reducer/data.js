@@ -9,7 +9,7 @@ const initialState = {
   moviesList: [],
   favMoviesList: [],
   fullMoviesList: [],
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   userData: null,
   reviews: [],
   similarMovies: []

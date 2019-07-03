@@ -14,20 +14,32 @@ const withLayout = (Wrapped) => {
       this.footer = null;
 
       if (props.user) {
-        this.userBlock = <div className="user-block__avatar">
+        this.userBlock = <Link to="/mylist"><div className="user-block__avatar">
           <img src={`https://es31-server.appspot.com/` + props.user.avatarUrl} alt="User avatar" width="63" height="63"/>
-        </div>;
+        </div></Link>;
       } else {
         this.userBlock = <Link to="/login" className="user-block__link">Sign in</Link>;
       }
 
-      this.footer = <footer className="page-footer">
+      this.userBlock = <header className="page-header movie-card__head">
         <div className="logo">
-          <a className="logo__link logo__link--light">
+          <Link to="/" className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
+        </div>
+
+        <div className="user-block">{this.userBlock}</div>
+      </header>;
+
+      this.footer = <footer className="page-footer">
+        <div className="logo">
+          <Link to="/" className="logo__link logo__link--light">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </Link>
         </div>
 
         <div className="copyright">

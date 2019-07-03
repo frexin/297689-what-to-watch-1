@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {compose} from "recompose";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 import {reducer, Operation} from './reducer/data.js';
 import App from './components/app/app.jsx';
@@ -28,8 +28,8 @@ store.dispatch(Operation.loadPromo());
 
 ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <App />
-      </BrowserRouter>
+      </Router>
     </Provider>,
     document.getElementById(`root`));
