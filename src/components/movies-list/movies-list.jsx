@@ -9,7 +9,7 @@ class MoviesList extends React.PureComponent {
 
     return (
       <Fragment>
-        <div className={`page-content catalog__movies-list`}>
+        <div className={`catalog__movies-list`}>
           {
             this.props.movies.map((item) => {
               return (

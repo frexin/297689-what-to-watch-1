@@ -6,6 +6,7 @@ const initialState = {
   moviesLimit: 20,
   hasMoreMovies: true,
   moviesList: [],
+  favMoviesList: [],
   fullMoviesList: [],
   isAuthorizationRequired: false,
   userData: null,
@@ -15,6 +16,7 @@ const initialState = {
 
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_FAV_MOVIES: `LOAD_FAV_MOVIES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_USER: `LOAD_USER`,
   CHANGE_GENRE: `CHANGE_GENRE`,
@@ -34,6 +36,13 @@ const Operation = {
           dispatch(ActionCreator.loadMovies(movies));
         });
   },
+  loadFavMovies: () => (dispatch, _getState, api) => {
+    return api.get(`/favorite`)
+        .then((resp) => {
+          const movies = adapter(resp.data);
+          dispatch(ActionCreator.loadFavMovies(movies));
+        });
+  },
   auth: (userEmail, userPassword) => (dispatch, _getState, api) => {
     return api.post(`/login`, {email: userEmail, password: userPassword})
         .then((resp) => {
@@ -49,8 +58,8 @@ const Operation = {
           dispatch(ActionCreator.toggleFavorite(status));
         });
   },
-  addReview: (filmId, rating, comment) => (dispatch, _getState, api) => {
-    return api.post(`/comments/${filmId}`, {rating: rating, comment: comment})
+  addReview: (filmId, userRating, userComment) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${filmId}`, {rating: userRating, comment: userComment})
         .then((resp) => {
           const comments = adapter(resp.data);
 
@@ -85,6 +94,11 @@ const reducer = (state = initialState, action) => {
         moviesList: action.moviesList.slice(0, state.moviesLimit),
         fullMoviesList: action.moviesList,
         hasMoreMovies: action.moviesList.length > state.moviesLimit
+      });
+
+    case ActionType.LOAD_FAV_MOVIES:
+      return Object.assign({}, state, {
+        favMoviesList: action.favMoviesList,
       });
 
     case ActionType.LOAD_REVIEWS:
@@ -141,6 +155,12 @@ const ActionCreator = {
       moviesList: movies
     };
   },
+  loadFavMovies: (movies) => {
+    return {
+      type: ActionType.LOAD_FAV_MOVIES,
+      favMoviesList: movies
+    };
+  },
   loadMovie: (id) => {
     return {
       type: ActionType.GET_MOVIE_BY_ID,
@@ -150,13 +170,13 @@ const ActionCreator = {
   reviewCreated: () => {
     return {
       type: ActionType.REVIEW_CREATED
-    }
+    };
   },
   toggleFavorite: (status) => {
     return {
       type: ActionType.TOGGLE_FAVORITE,
       payload: status
-    }
+    };
   },
   loadReviews: (data) => {
     return {

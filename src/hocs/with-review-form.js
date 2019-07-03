@@ -17,7 +17,7 @@ const withReviewForm = (Wrapped) => {
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
       const movieId = parseInt(this.props.match.params.id, 10);
 
       if (prevProps.movies !== this.props.movies) {
@@ -63,12 +63,27 @@ const withReviewForm = (Wrapped) => {
 
   }
 
+  WithReviewForm.propTypes = {
+    movie: PropTypes.object,
+    movies: PropTypes.array,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string
+      })
+    }),
+    onComponentLoaded: PropTypes.func,
+    onSubmit: PropTypes.func,
+    history: PropTypes.shape({
+      push: PropTypes.func
+    }),
+  };
+
   return WithReviewForm;
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   movie: state.currentMovie,
-  movies: state.moviesList,
+  movies: state.moviesList
 });
 
 const mapDispatchToProps = (dispatch) => {
