@@ -9,10 +9,12 @@ import MovieTabDetails from "../movie-tab-details/movie-tab-details.jsx";
 import MovieTabReviews from "../movie-tab-reviews/movie-tab-reviews.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item";
+import withTabs from "../../hocs/with-tabs.js";
 import {Link} from "react-router-dom";
 
 import {getSimilarMovies} from "../../reducer/selectors.js";
 const WrappedMovies = withActiveItem(MoviesList);
+const WrappedTabs = withTabs(Tabs);
 
 class MovieDetails extends React.PureComponent {
 
@@ -85,7 +87,7 @@ class MovieDetails extends React.PureComponent {
               </div>
 
               <div className="movie-card__desc">
-                <Tabs components={[MovieTabOverview, MovieTabDetails, MovieTabReviews]} {...this.props} />
+                <WrappedTabs components={[MovieTabOverview, MovieTabDetails, MovieTabReviews]} {...this.props} />
               </div>
             </div>
           </div>

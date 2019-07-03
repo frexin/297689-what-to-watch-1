@@ -6,7 +6,7 @@ import Tabs from "./tabs.jsx";
 
 it(`Tabs component loads correctly`, () => {
   const components = [StubComponent, StubComponent, StubComponent];
-  const tree = renderer.create(<Tabs components={components} />).toJSON();
+  const tree = renderer.create(<Tabs components={components} selectedIndex={0} selectTab={jest.fn()} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

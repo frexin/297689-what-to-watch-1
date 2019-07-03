@@ -7,7 +7,22 @@ import {
 } from "./data";
 
 import {movies} from '../mocks/films.js';
+import {comments} from "../mocks/reviews.js";
 
+
+it(`Reducer should load movies`, () => {
+  expect(reducer({
+    moviesLimit: 2
+  }, {
+    type: ActionType.LOAD_MOVIES,
+    moviesList: movies,
+  })).toEqual({
+    moviesLimit: 2,
+    moviesList: movies.slice(0, 2),
+    hasMoreMovies: true,
+    fullMoviesList: movies
+  });
+});
 
 it(`Reducer should change active genre`, () => {
   expect(reducer({
@@ -19,6 +34,83 @@ it(`Reducer should change active genre`, () => {
   })).toEqual({
     currentGenre: `Horror`,
     moviesList: movies
+  });
+});
+
+it(`Reducer should load fav movies`, () => {
+  expect(reducer({}, {
+    type: ActionType.LOAD_FAV_MOVIES,
+    favMoviesList: movies
+  })).toEqual({
+    favMoviesList: movies
+  });
+});
+
+it(`Reducer should load promo`, () => {
+  expect(reducer({}, {
+    type: ActionType.LOAD_PROMO,
+    payload: movies[0]
+  })).toEqual({
+    promoMovie: movies[0],
+    currentMovie: movies[0],
+  });
+});
+
+it(`Reducer should load reviews`, () => {
+  expect(reducer({
+    moviesList: movies
+  }, {
+    type: ActionType.LOAD_REVIEWS,
+    payload: [comments, 1]
+  })).toEqual({
+    moviesList: movies,
+    reviews: comments,
+    currentMovie: movies[0],
+  });
+});
+
+it(`Reducer should toggle fav`, () => {
+  const film = movies[0];
+
+  expect(reducer({
+    currentMovie: film
+  }, {
+    type: ActionType.TOGGLE_FAVORITE,
+    payload: 1
+  })).toEqual({
+    currentMovie: film
+  });
+});
+
+it(`Reducer should get movie`, () => {
+  const film = movies[0];
+
+  expect(reducer({
+    moviesList: movies
+  }, {
+    type: ActionType.GET_MOVIE_BY_ID,
+    payload: 1
+  })).toEqual({
+    moviesList: movies,
+    currentMovie: film
+  });
+});
+
+it(`Reducer should change auth`, () => {
+  expect(reducer({}, {
+    type: ActionType.CHANGE_AUTH_REQUIRE,
+    payload: false
+  })).toEqual({
+    isAuthorizationRequired: false
+  });
+});
+
+it(`Reducer should load user`, () => {
+  expect(reducer({}, {
+    type: ActionType.LOAD_USER,
+    payload: `user`
+  })).toEqual({
+    userData: `user`
   });
 });
 
