@@ -9,6 +9,7 @@ import MovieTabDetails from "../movie-tab-details/movie-tab-details.jsx";
 import MovieTabReviews from "../movie-tab-reviews/movie-tab-reviews.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item";
+import {Link} from "react-router-dom";
 
 import {getSimilarMovies} from "../../reducer/selectors.js";
 const WrappedMovies = withActiveItem(MoviesList);
@@ -80,7 +81,7 @@ class MovieDetails extends React.Component {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  <Link to={`/films/${movie.id}/review`} className="btn movie-card__button">Add review</Link>
                 </div>
               </div>
             </div>

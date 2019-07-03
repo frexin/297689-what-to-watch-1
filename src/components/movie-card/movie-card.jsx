@@ -53,7 +53,7 @@ class MovieCard extends React.PureComponent {
           {videoPreview}
         </div>
         <h3 className="small-movie-card__title">
-          <Link className="small-movie-card__link" to={{pathname: `/movie/${this.props.id}`
+          <Link className="small-movie-card__link" to={{pathname: `/film/${this.props.id}`
           }}>{this.props.name}</Link>
         </h3>
       </article>);
