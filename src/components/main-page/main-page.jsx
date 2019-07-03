@@ -8,7 +8,6 @@ import {connect} from "react-redux";
 import withActiveItem from "../../hocs/with-active-item.js";
 import {getMoviesForGenre, getGenresList} from "../../reducer/selectors.js";
 import MovieCardBig from "../movie-card-big/movie-card-big.jsx";
-import withLayout from "../../hocs/with-layout.js";
 import {Operation} from "../../reducer/data";
 
 
@@ -16,7 +15,7 @@ const WrappedGenres = withActiveItem(GenresList);
 const WrappedMovies = withActiveItem(MoviesList);
 
 const MainPage = (props) => {
-  const BigCard = withLayout(MovieCardBig);
+  const BigCard = MovieCardBig;
 
   if (props.showPlayer) {
     return <div>{props.player}</div>;
@@ -52,7 +51,11 @@ MainPage.propTypes = {
   currentGenre: PropTypes.string.isRequired,
   genres: PropTypes.array.isRequired,
   onLoadMore: PropTypes.func,
-  hasMoreMovies: PropTypes.bool
+  hasMoreMovies: PropTypes.bool,
+  showPlayer: PropTypes.bool,
+  player: PropTypes.object,
+  promo: PropTypes.object,
+  footer: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

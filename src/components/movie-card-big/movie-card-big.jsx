@@ -69,20 +69,12 @@ class MovieCardBig extends React.Component {
 MovieCardBig.propTypes = {
   isFavorite: PropTypes.number,
   userBlock: PropTypes.object,
-  player: PropTypes.object,
   showPlayer: PropTypes.bool,
   onOpenPlayer: PropTypes.func,
-  moviesList: PropTypes.array,
   similarMovies: PropTypes.array,
   onMoviesLoaded: PropTypes.func,
   toggleFavorite: PropTypes.func,
-  movie: PropTypes.object,
-  reviews: PropTypes.array,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string
-    })
-  })
+  movie: PropTypes.object
 };
 
 export default MovieCardBig;
