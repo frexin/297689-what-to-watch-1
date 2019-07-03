@@ -5,32 +5,32 @@ import MoviesList from '../movies-list/movies-list.jsx';
 import GenresList from "../genres-list/genres-list.jsx";
 import {ActionCreator} from "../../reducer/data.js";
 import {connect} from "react-redux";
-import withActiveItem from "../../hocs/with-active-item";
+import withActiveItem from "../../hocs/with-active-item.js";
 import {getMoviesForGenre, getGenresList} from "../../reducer/selectors.js";
+import MovieCardBig from "../movie-card-big/movie-card-big.jsx";
+import withLayout from "../../hocs/with-layout.js";
+import {Operation} from "../../reducer/data";
+
 
 const WrappedGenres = withActiveItem(GenresList);
 const WrappedMovies = withActiveItem(MoviesList);
 
 const MainPage = (props) => {
+  const BigCard = withLayout(MovieCardBig);
+
+  if (props.showPlayer) {
+    return <div>{props.player}</div>;
+  }
 
   return (
     <Fragment>
-      <header className="page-header">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="user-block">{props.userBlock}</div>
-      </header>
+      <BigCard movie={props.promo} {...props} />
       <div className={`page-content`}>
         <section className={`catalog`}>
           <WrappedGenres genres={props.genres} activeItem={props.currentGenre} onSelect={props.onGenreSelect} />
           <WrappedMovies movies={props.movies} onLoadMore={props.onLoadMore} hasMoreMovies={props.hasMoreMovies} />
         </section>
+        {props.footer}
       </div>
     </Fragment>
   );
@@ -56,6 +56,9 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  promo: state.promoMovie,
+  currentMovie: state.promoMovie,
+  isFavorite: state.promoMovie ? +state.promoMovie.isFavorite : 0,
   movies: getMoviesForGenre(state),
   genres: getGenresList(state),
   currentGenre: state.currentGenre,
@@ -70,6 +73,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onLoadMore: () => {
       dispatch(ActionCreator.extendLimit());
+    },
+    toggleFavorite: (id, status) => {
+      dispatch(Operation.toggleFavorite(id, +status));
     }
   };
 };

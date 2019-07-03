@@ -3,6 +3,7 @@ import adapter from './../adapter.js';
 const initialState = {
   currentGenre: `All genres`,
   currentMovie: null,
+  promoMovie: null,
   moviesLimit: 20,
   hasMoreMovies: true,
   moviesList: [],
@@ -16,6 +17,7 @@ const initialState = {
 
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_PROMO: `LOAD_PROMO`,
   LOAD_FAV_MOVIES: `LOAD_FAV_MOVIES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_USER: `LOAD_USER`,
@@ -34,6 +36,13 @@ const Operation = {
         .then((resp) => {
           const movies = adapter(resp.data);
           dispatch(ActionCreator.loadMovies(movies));
+        });
+  },
+  loadPromo: () => (dispatch, _getState, api) => {
+    return api.get(`/films/promo`)
+        .then((resp) => {
+          const movie = adapter(resp.data);
+          dispatch(ActionCreator.loadPromo(movie));
         });
   },
   loadFavMovies: () => (dispatch, _getState, api) => {
@@ -101,6 +110,12 @@ const reducer = (state = initialState, action) => {
         favMoviesList: action.favMoviesList,
       });
 
+    case ActionType.LOAD_PROMO:
+      return Object.assign({}, state, {
+        promoMovie: action.payload,
+        currentMovie: action.payload,
+      });
+
     case ActionType.LOAD_REVIEWS:
       return Object.assign({}, state, {
         reviews: action.payload[0],
@@ -165,6 +180,12 @@ const ActionCreator = {
     return {
       type: ActionType.GET_MOVIE_BY_ID,
       payload: id
+    };
+  },
+  loadPromo: (movie) => {
+    return {
+      type: ActionType.LOAD_PROMO,
+      payload: movie
     };
   },
   reviewCreated: () => {

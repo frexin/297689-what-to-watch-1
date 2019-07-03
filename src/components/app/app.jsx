@@ -11,16 +11,16 @@ import withLayout from "../../hocs/with-layout.js";
 import withReviewForm from "../../hocs/with-review-form.js";
 import withBigPlayer from "../../hocs/with-player.js";
 import MovieDetails from "../movie-details/movie-details.jsx";
-import AddReview from "../add-review/add-review.jsx";
+import AddReview from "../add-review/add-review.jsx";``
 
 const App = (props) => {
 
   return (
     <Switch>
-      <Route exact path="/" component={withLayout(MainPage)} />
+      <Route exact path="/" component={withBigPlayer(MainPage)} />
       <Route path="/login" render={() => <SignIn onFormSubmit={props.onFormSubmit} authRequire={props.authRequire} />} />
       <Route path="/mylist" component={withLayout(withAuth(Favorites))} />
-      <Route exact path="/film/:id" component={withLayout(withBigPlayer(MovieDetails))} />
+      <Route exact path="/film/:id" component={withBigPlayer(MovieDetails)} />
       <Route path="/films/:id/review" component={withLayout(withAuth(withReviewForm(AddReview)))} />
     </Switch>
   );
