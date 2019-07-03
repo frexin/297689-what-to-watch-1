@@ -9,6 +9,7 @@ import MovieTabDetails from "../movie-tab-details/movie-tab-details.jsx";
 import MovieTabReviews from "../movie-tab-reviews/movie-tab-reviews.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item";
+import {Link} from "react-router-dom";
 
 import {getSimilarMovies} from "../../reducer/selectors.js";
 const WrappedMovies = withActiveItem(MoviesList);
@@ -35,6 +36,10 @@ class MovieDetails extends React.Component {
 
     if (!movie) {
       return <Fragment/>;
+    }
+
+    if (this.props.showPlayer) {
+      return <div>{this.props.player}</div>;
     }
 
     return (
@@ -66,7 +71,7 @@ class MovieDetails extends React.Component {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" onClick={this.props.onOpenPlayer}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                     </svg>
                     <span>Play</span>
