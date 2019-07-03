@@ -43,8 +43,7 @@ class AddReview extends React.PureComponent {
             <div className="user-block">
               <Link to="/mylist">
                 <div className="user-block__avatar">
-                  <img src={`https://es31-server.appspot.com/` + this.props.user.avatarUrl} alt="User avatar"
-                       width="63" height="63"/>
+                  <img src={`https://es31-server.appspot.com/` + this.props.user.avatarUrl} alt="User avatar" width="63" height="63"/>
                 </div>
               </Link>
             </div>
@@ -59,31 +58,25 @@ class AddReview extends React.PureComponent {
           <form className="add-review__form" onSubmit={(ev) => this.props.handleFormSubmit(ev)}>
             <div className="rating">
               <div className="rating__stars">
-                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-1"
-                       type="radio" name="rating" value="1"/>
+                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
                 <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-2"
-                       type="radio" name="rating" value="2"/>
+                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-2" type="radio" name="rating" value="2"/>
                 <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-3"
-                       type="radio" name="rating" value="3"/>
+                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-3" type="radio" name="rating" value="3"/>
                 <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-4"
-                       type="radio" name="rating" value="4"/>
+                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-4" type="radio" name="rating" value="4"/>
                 <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-5"
-                       type="radio" name="rating" value="5"/>
+                <input onChange={(ev) => this.props.validate(ev.target.form)} className="rating__input" id="star-5" type="radio" name="rating" value="5"/>
                 <label className="rating__label" htmlFor="star-5">Rating 5</label>
               </div>
             </div>
 
             <div className="add-review__text">
-              <textarea className="add-review__textarea" onChange={(ev) => this.props.validate(ev.target.form)}
-                        required name="review-text" id="review-text" placeholder="Review text"/>
+              <textarea className="add-review__textarea" onChange={(ev) => this.props.validate(ev.target.form)} required name="review-text" id="review-text" placeholder="Review text"/>
               <div className="add-review__submit">
                 <button className="add-review__btn" disabled={!this.props.isValid} type="submit">Post</button>
               </div>
@@ -100,7 +93,10 @@ AddReview.propTypes = {
   validate: PropTypes.func,
   handleFormSubmit: PropTypes.func,
   movie: PropTypes.object,
-  isValid: PropTypes.bool
+  isValid: PropTypes.bool,
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string
+  })
 };
 
 export default AddReview;

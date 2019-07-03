@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
-class MovieCardBig extends React.Component {
+class MovieCardBig extends React.PureComponent {
 
   render() {
     const movie = this.props.movie;

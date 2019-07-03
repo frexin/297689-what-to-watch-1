@@ -14,7 +14,7 @@ import {Link} from "react-router-dom";
 import {getSimilarMovies} from "../../reducer/selectors.js";
 const WrappedMovies = withActiveItem(MoviesList);
 
-class MovieDetails extends React.Component {
+class MovieDetails extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
@@ -97,7 +97,7 @@ class MovieDetails extends React.Component {
             <WrappedMovies onLoadMore={() => {}} hasMoreMovies={false} movies={this.props.similarMovies} />
           </section>
 
-        {this.props.footer}
+          {this.props.footer}
         </div>
       </Fragment>
     );
@@ -126,6 +126,7 @@ const mapDispatchToProps = (dispatch) => {
 MovieDetails.propTypes = {
   isFavorite: PropTypes.number,
   userBlock: PropTypes.object,
+  footer: PropTypes.object,
   player: PropTypes.object,
   showPlayer: PropTypes.bool,
   onOpenPlayer: PropTypes.func,

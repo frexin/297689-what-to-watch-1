@@ -8,7 +8,7 @@ import {Operation} from "../../reducer/data";
 
 const WrappedMovies = withActiveItem(MoviesList);
 
-class Favorites extends React.Component {
+class Favorites extends React.PureComponent {
 
   componentDidMount() {
     this.props.onComponentReady();
@@ -43,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
 
 Favorites.propTypes = {
   userBlock: PropTypes.object,
+  footer: PropTypes.object,
   onComponentReady: PropTypes.func,
   favMoviesList: PropTypes.array,
 };

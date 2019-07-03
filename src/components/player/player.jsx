@@ -4,7 +4,7 @@ import {formatPlayerDuration} from "../../utils.js";
 
 import PropTypes from 'prop-types';
 
-class Player extends React.Component {
+class Player extends React.PureComponent {
 
   constructor(props) {
     super(props);
