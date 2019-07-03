@@ -73,11 +73,13 @@ class MovieDetails extends React.Component {
                 <div className="movie-card__buttons">
                   <button className="btn btn--play movie-card__button" type="button" onClick={this.props.onOpenPlayer}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s" />
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button">
+                  <button className="btn btn--list movie-card__button" onClick={() => this.props.toggleFavorite(movie.id, !movie.isFavorite)} type="button">
                     <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref={`#${this.props.isFavorite ? `in-list` : `add`}`} />
                     </svg>
                     <span>My list</span>
                   </button>
@@ -127,6 +129,7 @@ class MovieDetails extends React.Component {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   movie: state.currentMovie,
   moviesList: state.moviesList,
+  isFavorite: state.currentMovie ? +state.currentMovie.isFavorite : 0,
   reviews: state.reviews,
   similarMovies: getSimilarMovies(state)
 });
@@ -135,11 +138,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onMoviesLoaded: (movieId) => {
       dispatch(Operation.loadMovie(movieId));
+    },
+    toggleFavorite: (id, status) => {
+      dispatch(Operation.toggleFavorite(id, +status));
     }
   };
 };
 
 MovieDetails.propTypes = {
+  isFavorite: PropTypes.number,
   userBlock: PropTypes.object,
   player: PropTypes.object,
   showPlayer: PropTypes.bool,
